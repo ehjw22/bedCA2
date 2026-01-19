@@ -15,3 +15,7 @@ footer {
     color: #9fa4ff;
     background-color: #0f1224;
 }
+
+.glow {
+    text-shadow: 0 0 10px rgba(173, 216, 230, 0.8);
+}
