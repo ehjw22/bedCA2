@@ -824,3 +824,57 @@ module.exports.login = (req, res, next) => {
 
     model.getUserId(data, callback);
 }
+
+module.exports.checkUsernameOrEmailExist = (req, res, next) => {
+    const inputUsername = req.body.username;
+    const inputEmail = req.body.email;
+
+    if (!inputUsername) {
+        return res.status(404).json({message: "Invalid format for username"});
+    }
+
+    if (!inputEmail) {
+        return res.status(404).json({message: "Invalid format for email"});
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error checkUsernameOrEmailExist:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            if (results.length !== 0) {
+                return res.status(409).json({message: "Username or email already exists"});
+            } else {
+                next();
+            }
+        }
+    }
+
+    const data = {
+        username: inputUsername,
+        email: inputEmail
+    };
+
+    model.getUserId(data, callback);
+}
+
+module.exports.register = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error register:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            res.locals.userId = results.insertId
+            res.locals.message = `User ${req.body.username} created successfully.`
+            next();
+        }
+    }
+
+    const data = {
+        username: req.body.username,
+        email: req.body.email,
+        password: res.locals.hash
+    };
+
+    model.registerUser(data, callback);
+}

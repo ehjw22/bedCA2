@@ -404,3 +404,14 @@ module.exports.checkNUnlockBadges = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.registerUser = (data, callback) => {
+    const SQLSTATEMENT = `
+    INSERT INTO User (username, email, password) VALUES
+    (?, ?, ?);
+    `;
+
+    const VALUES = [data.username, data.email, data.password];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}
