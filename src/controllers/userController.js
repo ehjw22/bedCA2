@@ -363,12 +363,12 @@ module.exports.confirmLogin = (req, res, next) => {
             console.error("Error confirmLogin:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
-            return res.status(200).json({message: "Login successful"});
+            next();
         }
     }
 
     const data = {
-        id: req.params.user_id
+        id: res.locals.userId
     }
     
     model.updateLogin(data, callback);
@@ -787,4 +787,40 @@ module.exports.unlockBadges = (req, res, next) => {
     };
 
     model.checkNUnlockBadges(data, callback);
+}
+
+module.exports.login = (req, res, next) => {
+
+    const inputUsername = req.body.username;
+    const inputEmail = req.body.email;
+
+    if (inputEmail != undefined && inputEmail.length === 0) {
+        return res.status(400).json({message: "Invalid Email"})
+    }
+
+    if (inputUsername != undefined && inputUsername.length === 0) {
+        return res.status(400).json({message: "Invalid username"})
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error login:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            if (results.length === 0) {
+                return res.status(404).json({message: "User not found"});
+            } else {
+                res.locals.hash = results[0].password;
+                res.locals.userId = results[0].user_id;
+                next();
+            }
+        }
+    }
+
+    const data = {
+        username: inputUsername,
+        email: inputEmail
+    }
+
+    model.getUserId(data, callback);
 }

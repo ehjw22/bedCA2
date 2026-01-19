@@ -93,7 +93,7 @@ module.exports.getUserId = (data, callback) => {
     WHERE username = ? OR email = ?;
     `;
 
-    const VALUES = [data.username, data.email];
+    const VALUES = [data.username || "", data.email || ""];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
