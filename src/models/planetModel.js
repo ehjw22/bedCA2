@@ -7,9 +7,7 @@ const pool = require('../services/db');
 module.exports.getAllPlanets = (callback) => {
     const SQLSTATEMENT = `
     SELECT 
-        planet_id,
-        name, 
-        description
+        *
     FROM planet
     `;
 
