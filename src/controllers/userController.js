@@ -791,15 +791,21 @@ module.exports.unlockBadges = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
 
-    const inputUsername = req.body.username;
-    const inputEmail = req.body.email;
+    // const inputUsername = req.body.username;
+    // const inputEmail = req.body.email;
 
-    if (inputEmail != undefined && inputEmail.length === 0) {
-        return res.status(400).json({message: "Invalid Email"})
-    }
+    // if (inputEmail != undefined && inputEmail.length === 0) {
+    //     return res.status(400).json({message: "Invalid Email"})
+    // }
 
-    if (inputUsername != undefined && inputUsername.length === 0) {
-        return res.status(400).json({message: "Invalid username"})
+    // if (inputUsername != undefined && inputUsername.length === 0) {
+    //     return res.status(400).json({message: "Invalid username"})
+    // }
+
+    const inputIdentifier = req.body.identifier;
+
+    if (!inputIdentifier) {
+        return res.status(400).json({message: "Invalid identifier"})
     }
 
     const callback = (error, results, fields) => {
@@ -818,8 +824,9 @@ module.exports.login = (req, res, next) => {
     }
 
     const data = {
-        username: inputUsername,
-        email: inputEmail
+        identifier: req.body.identifier
+        // username: inputUsername,
+        // email: inputEmail
     }
 
     model.getUserId(data, callback);
