@@ -419,3 +419,20 @@ module.exports.registerUser = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.getUserBoughtPlants = (data, callback) => {
+    const SQLSTATEMENT = `
+    SELECT 
+        userboughtplants.user_id,
+        plant.name,
+        plant.plant_id,
+        userboughtplants.quantity
+    FROM userboughtplants
+    INNER JOIN plant on plant.plant_id = userboughtplants.plant_id
+    WHERE user_id = ?;
+    `;
+
+    const VALUES = [data.user_id];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}

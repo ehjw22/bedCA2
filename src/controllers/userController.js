@@ -885,3 +885,19 @@ module.exports.register = (req, res, next) => {
 
     model.registerUser(data, callback);
 }
+
+module.exports.getUserBoughtPlants = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getUserBoughtPlants:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            return res.status(200).json(results);
+        }
+    }
+
+    const data = {
+        user_id: req.params.user_id
+    }
+    model.getUserBoughtPlants(data, callback);
+}

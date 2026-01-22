@@ -67,6 +67,10 @@ router.get("/:user_id/plants",
     controller.getAllPlants
 );
 
+router.get("/:user_id/boughtPlants", 
+    controller.checkUserIdExist,
+    controller.getUserBoughtPlants
+)
 // GET /users/{user_id}/completions
 // Retrieves all challenges completed by the user
 router.get('/:user_id/completions',
