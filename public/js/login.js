@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (responseData.token) {
                 // Store the token in local storage
                 localStorage.setItem("token", responseData.token);
+                localStorage.setItem("userId", responseData.userId);
                 // Redirect or perform further actions for logged-in user
-                window.location.href = "profile.html";
+                window.location.href = `profile.html`;
             }
         } else {
             warningCard.classList.remove("d-none");
