@@ -93,7 +93,7 @@ module.exports.getUserId = (data, callback) => {
     WHERE username = ? OR email = ?;
     `;
 
-    const VALUES = [data.identifier, data.identifier];
+    const VALUES = [data.identifier || data.username, data.identifier || data.email];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
@@ -187,13 +187,17 @@ module.exports.updateUserLevel = (data, callback) => {
 module.exports.getUsersCompletedChallenges = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT
+        wellnesschallenge.description as challenge,
+        wellnesschallenge.difficulty,
         usercompletion.challenge_id,
         usercompletion.details,
         usercompletion.completed_on,
         usercompletion.points_earned,
-        usercompletion.difficulty_rating
+        usercompletion.difficulty_rating,
+        usercompletion.feedback
     FROM usercompletion
     INNER JOIN user ON usercompletion.user_id = user.user_id
+    INNER JOIN wellnesschallenge ON wellnesschallenge.challenge_id = usercompletion.challenge_id
     WHERE user.user_id = ?;
     `;
 
