@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   logoutButton.addEventListener("click", function () {
     // Remove the token from local storage and redirect to index.html
     localStorage.removeItem("token");
+    localStorage.removeItem("userId")
     window.location.href = "index.html";
   });
 });
