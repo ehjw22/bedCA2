@@ -32,9 +32,7 @@ module.exports.readAllUser = (callback) => {
 module.exports.readUserById = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT
-        user_id,
-        username,
-        points
+        *
     FROM user
     WHERE user_id = ?;
     `;
