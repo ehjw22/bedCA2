@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const userBoughtPlantsDiv = document.getElementById("userBoughtPlants");
+const displayAllUserBoughtPlants = function() {
+    const userBoughtPlantsDiv = document.getElementById("boughtPlantsList");
 
     if (!localStorage.getItem("token")) {
         const loginText = document.createElement("h2")
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const callback = (responseStatus, responseData) => {
             console.log("responseStatus:", responseStatus);
             console.log("responseData:", responseData);
-
+            userBoughtPlantsDiv.innerHTML = ""
             responseData.forEach(plant => {
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -30,4 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}/boughtPlants`, callback);
     }
-})
+}
+
+document.addEventListener("DOMContentLoaded", displayAllUserBoughtPlants());
