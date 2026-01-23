@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="./css/challenges.css">
+    <link rel="stylesheet" href="./css/userStats.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -63,7 +64,7 @@
     </nav>
 
     <main class="flex-grow-1 container-md">
-      <div>
+      <div class="row">
         <div id="loginDirect" class="text-center d-none">
           <h3 class="mb-4 glow">Register/Login first to view your statistics</h3>
           <div class="d-flex justify-content-center gap-3">
@@ -71,113 +72,118 @@
             <a href="login.html" class="btn btn-primary w-25 btn-lg">Login</a>
           </div>
         </div>
-        <div id="statisticsCard" class="d-none">
+        <div id="statisticsCard" class="d-none p-4 mt-3">
+          <h1 class="text-center mt-2 glow">Your Wellness Journey</h1>
+          <p class="text-center">Track your progress as you complete quests, earn points, and unlock new planets.</p>
+          <div id="statisticsList">
 
+          </div>
         </div>
       </div>
-        <div id="challengesContainer" class="row bg-dark mt-3">
-            <h1 class="text-center mt-2 glow">Wellness Challenges</h1>
-            <p class="text-center">Complete challenges to earn points, unlock planets and buy plants.</p>
-            
-            <div id="challengesList" class="row mt-3">
 
-            </div>
-            <div class="text-center my-3">
-              <button class="btn btn-outline-light" id="createChallengeBtn">
-                + Create your own challenge
-              </button>
-            </div>
-            
-            <div class="modal fade" id="createChallengeModal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Create Your Own Challenge</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <form id="createChallengeForm">
-                    <div class="modal-body">
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="challengeDescription" placeholder="Challenge Name" required>
-                        <label for="challengeName">Challenge Description</label>
-                      </div>
+      <div id="challengesContainer" class="row bg-dark mt-3">
+          <h1 class="text-center mt-5 glow">Wellness Challenges</h1>
+          <p class="text-center">Complete challenges to earn points, unlock planets and buy plants.</p>
+          
+          <div id="challengesList" class="row mt-3">
 
-                      <div class="mb-3">
-                        <select class="form-select" id="challengeDifficulty" required>
-                          <option value="" selected disabled>Select difficulty</option>
-                          <option value="easy">Easy</option>
-                          <option value="medium">Medium</option>
-                          <option value="hard">Hard</option>
-                        </select>
-                      </div>
-
-                      <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="challengePoints" placeholder="Points Reward" required>
-                        <label for="challengePoints">Points Reward</label>
-                      </div>
-
-                      
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Create Challenge</button>
-                    </div>
-                  </form>
+          </div>
+          <div class="text-center my-3">
+            <button class="btn btn-outline-light" id="createChallengeBtn">
+              + Create your own challenge
+            </button>
+          </div>
+          
+          <div class="modal fade" id="createChallengeModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Create Your Own Challenge</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-              </div>
-            </div>
-        </div>
+                <form id="createChallengeForm">
+                  <div class="modal-body">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="challengeDescription" placeholder="Challenge Name" required>
+                      <label for="challengeName">Challenge Description</label>
+                    </div>
 
-        <div class="modal fade" id="completeModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+                    <div class="mb-3">
+                      <select class="form-select" id="challengeDifficulty" required>
+                        <option value="" selected disabled>Select difficulty</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                      </select>
+                    </div>
 
-              <div class="modal-header">
-                <h5 class="modal-title">Complete Challenge</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-              </div>
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="challengePoints" placeholder="Points Reward" required>
+                      <label for="challengePoints">Points Reward</label>
+                    </div>
 
-              <div class="modal-body">
-                <form id="completeForm">
-                  <label for="reflection" class="fs-5">Tell us what you did</label>
-                  <textarea
-                    id="reflection"
-                    class="form-control"
-                    placeholder="I did..."
-                    required></textarea>
-
-                  <div class="rounded p-2 mt-3">
-                        <label for="difficulty" class="form-label fs-5">How difficult was the challenge (1 = Very Easy, 5  = Very Difficult)</label>
-                        <input type="range" class="form-range custom-slider" min="1" max="5" id="difficulty">
-                        <div class="d-flex justify-content-between">
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                        </div>
+                    
                   </div>
-                  <label for="feedback" class="fs-5 mt-3">Any feedback about this challenge?</label>
-                  <textarea id="feedback" class="form-control" placeholder=""></textarea>
                   <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="submitChallenge" class="btn btn-primary" type="submit">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Challenge</button>
                   </div>
-                </form>  
+                </form>
               </div>
-              
-
             </div>
           </div>
-        </div>
+      </div>
 
-        <div class="toast-container position-fixed bottom-0 start-0 p-3">
-          <div id="messageToast" class="toast text-bg-danger" role="alert">
-            <div class="toast-body">
-              
+      <div class="modal fade" id="completeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title">Complete Challenge</h5>
+              <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
+            <div class="modal-body">
+              <form id="completeForm">
+                <label for="reflection" class="fs-5">Tell us what you did</label>
+                <textarea
+                  id="reflection"
+                  class="form-control"
+                  placeholder="I did..."
+                  required></textarea>
+
+                <div class="rounded p-2 mt-3">
+                      <label for="difficulty" class="form-label fs-5">How difficult was the challenge (1 = Very Easy, 5  = Very Difficult)</label>
+                      <input type="range" class="form-range custom-slider" min="1" max="5" id="difficulty">
+                      <div class="d-flex justify-content-between">
+                          <span>1</span>
+                          <span>2</span>
+                          <span>3</span>
+                          <span>4</span>
+                          <span>5</span>
+                      </div>
+                </div>
+                <label for="feedback" class="fs-5 mt-3">Any feedback about this challenge?</label>
+                <textarea id="feedback" class="form-control" placeholder=""></textarea>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button id="submitChallenge" class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </form>  
+            </div>
+            
+
           </div>
         </div>
+      </div>
+
+      <div class="toast-container position-fixed bottom-0 start-0 p-3">
+        <div id="messageToast" class="toast text-bg-danger" role="alert">
+          <div class="toast-body">
+            
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="text-center py-3">
@@ -191,5 +197,6 @@
     <script src="js/userNavbarToggle.js" type="text/javascript"></script>
     <script src="js/homepageStatsToggle.js" type="text/javascript"></script>
     <script src="js/createChallenge.js" type="text/javascript"></script>
+    <script src="js/displayUserStats.js" type="text/javascript"></script>
 </body>
 </html>
