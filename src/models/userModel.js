@@ -426,7 +426,8 @@ module.exports.getUserBoughtPlants = (data, callback) => {
         userboughtplants.user_id,
         plant.name,
         plant.plant_id,
-        userboughtplants.quantity
+        userboughtplants.quantity,
+        plant.growth_time_days
     FROM userboughtplants
     INNER JOIN plant on plant.plant_id = userboughtplants.plant_id
     WHERE user_id = ?;
