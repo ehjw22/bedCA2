@@ -901,3 +901,20 @@ module.exports.getUserBoughtPlants = (req, res, next) => {
     }
     model.getUserBoughtPlants(data, callback);
 }
+
+module.exports.getUserCreatedChallenges = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getUserCreatedChallenges:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            return res.status(200).json(results);
+        }
+    }
+
+    const data = {
+        userId: req.params.user_id
+    }
+
+    model.getUsersCreatedChallenges(data, callback);
+}

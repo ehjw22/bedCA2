@@ -435,3 +435,14 @@ module.exports.getUserBoughtPlants = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.getUsersCreatedChallenges = (data, callback) => {
+    const SQLSTATEMENT = `
+    SELECT * FROM wellnesschallenge
+    WHERE creator_id = ?;
+    `;
+
+    const VALUES = [data.userId];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}
