@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const challengeId = localStorage.getItem("currentChallengeId");
 
         const data = {
-            user_id: localStorage.getItem("userId"),
             challenge_id: challengeId,
             details: reflection,
             difficulty,
@@ -40,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (responseStatus == 200) {
                 showToast("Challenge successfully completed");
                 bootstrap.Modal.getInstance(document.getElementById("completeModal")).hide();
+                displayUserStats();
             }
             console.log(responseStatus)
             console.log(responseData);
@@ -49,8 +49,10 @@ document.addEventListener("DOMContentLoaded", function() {
             currentUrl + `/api/challenges/${challengeId}`,
             submitCallback,
             "POST",
-            data
+            data,
+            localStorage.getItem("token")
         );        
+       
         completeForm.reset()
     })
     

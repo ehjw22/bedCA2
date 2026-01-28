@@ -4,7 +4,7 @@ const displayUserStats = function() {
         console.log("Response Data:", responseData);
 
         const userStatsList = document.getElementById("statisticsList")
-
+        userStatsList.innerHTML = "";
         const displayItem = document.createElement("div");
         displayItem.className = "row g-5";
         displayItem.innerHTML = `
