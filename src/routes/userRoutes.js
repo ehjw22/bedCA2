@@ -111,8 +111,8 @@ router.post('/:user_id/plants/:plant_id/buy',
     controller.buyPlant
 );
 
-router.get("/:user_id/challenges",
-    controller.checkUserIdExist,
+router.get("/token/challenges",
+    jwtMiddleware.verifyToken,
     controller.getUserCreatedChallenges
 )
 module.exports = router

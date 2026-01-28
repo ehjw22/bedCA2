@@ -55,7 +55,7 @@ module.exports.createCompletionRecord = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.body.user_id,
+        user_id: res.locals.userId,
         details: req.body.details,
         challenge_id: req.params.challenge_id,
         feedback: req.body.feedback || "",
@@ -94,7 +94,7 @@ module.exports.sendResponse = (req, res, next) => {
     return res.status(200).json({
         complete_id: res.locals.completionId,
         challenge_id: Number(req.params.challenge_id),
-        user_id: req.body.user_id,
+        user_id: res.locals.user_id,
         details: req.body.details
     });
 }

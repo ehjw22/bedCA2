@@ -4,7 +4,8 @@
 // =================================
 const express = require('express');
 const challengesController = require('../controllers/challengesController');
-const completionController = require('../controllers/completionsController')
+const completionController = require('../controllers/completionsController');
+const jwtMiddleware = require('../middlewares/jwtMiddleware');
 
 // =================================
 // CREATING ROUTER

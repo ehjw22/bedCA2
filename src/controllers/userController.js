@@ -283,7 +283,7 @@ module.exports.updatePointsNExp = (req, res, next) => {
 
     const data = {
         addPoints: res.locals.points,
-        user_id: req.body.user_id
+        user_id: res.locals.userId
     };
 
     model.updateDetails(data, callback);
@@ -306,7 +306,7 @@ module.exports.updateLevel = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.body.user_id
+        user_id: res.locals.userId
     }
 
     model.updateUserLevel(data, callback);
@@ -676,7 +676,7 @@ module.exports.unlockPlanets = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.body.user_id,
+        user_id: res.locals.userId,
         user_level: res.locals.level
     }
 
@@ -782,7 +782,7 @@ module.exports.unlockBadges = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.body.user_id,
+        user_id: res.locals.userId,
         challenges_required: res.locals.challenges_required
     };
 
@@ -913,7 +913,7 @@ module.exports.getUserCreatedChallenges = (req, res, next) => {
     }
 
     const data = {
-        userId: req.params.user_id
+        userId: res.locals.userId
     }
 
     model.getUsersCreatedChallenges(data, callback);
