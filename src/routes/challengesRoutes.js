@@ -35,6 +35,7 @@ router.delete('/:challenge_id',
 // 8. PUT /challenges/{challenge_id}
 // Updates an existing challenge after verifying it exists and checking creator ownership
 router.put('/:challenge_id', 
+    jwtMiddleware.verifyToken,
     challengesController.checkChallengeExist,
     challengesController.checkCreatorOfChallenge,
     challengesController.updateChallenge

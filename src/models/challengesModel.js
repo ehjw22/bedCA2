@@ -45,11 +45,11 @@ module.exports.deleteChallenge = (data, callback) => {
 module.exports.updateChallenge = (data, callback) => {
     const SQLSTATEMENT = `
     UPDATE wellnesschallenge
-    SET creator_id = ?, description = ?, points = ?
+    SET creator_id = ?, description = ?, points = ?, difficulty = ?
     WHERE challenge_id = ?;
     `;
 
-    const VALUES = [data.creator_id, data.description, data.points, data.challenge_id];
+    const VALUES = [data.creator_id, data.description, data.points, data.difficulty, data.challenge_id];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }

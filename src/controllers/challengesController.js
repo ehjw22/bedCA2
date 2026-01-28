@@ -139,7 +139,8 @@ module.exports.updateChallenge = (req, res, next) => {
 
     const inputDescription = req.body.description;
     const inputPoints = Number(req.body.points);
-    const creatorId = req.body.user_id;
+    const creatorId = res.locals.userId;
+    const difficulty = req.body.difficulty
 
     if (inputDescription === undefined || inputDescription === "") {
         return res.status(400).json({message: "Invalid format for description of challenge"});
@@ -167,7 +168,8 @@ module.exports.updateChallenge = (req, res, next) => {
         creator_id: creatorId, 
         description: inputDescription,
         challenge_id: req.params.challenge_id,
-        points: inputPoints
+        points: inputPoints,
+        difficulty
     };
 
     model.updateChallenge(data, callback);
@@ -179,7 +181,7 @@ Calls the model to retrieve the creator ID of the challenge.
 Returns 403 if not owner, 404 if not found, or proceeds to next middleware.
 */
 module.exports.checkCreatorOfChallenge = (req, res, next) => {
-    const inputCreator_id = Number(req.body.user_id);
+    const inputCreator_id = Number(res.locals.userId);
 
     if (isNaN(inputCreator_id) || inputCreator_id <= 0) {
         return res.status(400).json({message: "Invalid format for user ID"})
