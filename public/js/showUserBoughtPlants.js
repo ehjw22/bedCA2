@@ -28,7 +28,7 @@ const displayAllUserBoughtPlants = function() {
             })
         }
 
-    fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}/boughtPlants`, callback);
+        fetchMethod(currentUrl + `/api/user/token/boughtPlants`, callback, "GET", null, localStorage.getItem("token"));
     }
 }
 

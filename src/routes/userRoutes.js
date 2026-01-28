@@ -72,7 +72,7 @@ router.get("/:user_id/plants",
 );
 
 router.get("/:user_id/boughtPlants", 
-    controller.checkUserIdExist,
+    jwtMiddleware.verifyToken,
     controller.getUserBoughtPlants
 )
 // GET /users/{user_id}/completions
