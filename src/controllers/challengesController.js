@@ -45,7 +45,7 @@ Returns 201 on success, 400 for invalid input, or 500 on error.
 module.exports.addChallenges = (req, res, next) => {
 
     const description = req.body.description;
-    const user_id = Number(req.body.user_id);
+    const user_id = Number(res.locals.userId);
     const points = Number(req.body.points);
 
     if (description === undefined || description === "") {

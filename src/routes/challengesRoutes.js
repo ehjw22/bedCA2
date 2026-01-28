@@ -18,7 +18,10 @@ const router = express.Router();
 
 // 5. POST /challenges
 // Handles creation of a new challenge by receiving request data
-router.post('/', challengesController.addChallenges);
+router.post('/', 
+    jwtMiddleware.verifyToken,
+    challengesController.addChallenges
+);
 
 // 6. GET /challenges
 // Retrieves all challenges from the database and returns them 

@@ -19,13 +19,11 @@ newChallengeForm.addEventListener("submit", function(e) {
     const description = document.getElementById("challengeDescription").value;
     const points = document.getElementById("challengePoints").value;
     const difficulty = document.getElementById("challengeDifficulty").value;
-    const user_id = localStorage.getItem("userId");
 
     const data = {
         description,
         points,
-        difficulty,
-        user_id
+        difficulty
     };
 
     const callback = (responseStatus, responseData) => {
@@ -38,5 +36,5 @@ newChallengeForm.addEventListener("submit", function(e) {
         }
     }
 
-    fetchMethod(currentUrl + `/api/challenges`, callback, "POST", data)
+    fetchMethod(currentUrl + `/api/challenges`, callback, "POST", data, localStorage.getItem("token"));
 })
