@@ -53,3 +53,43 @@ document.addEventListener("click", (event) => {
     }
     fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE");
 })
+
+document.addEventListener("click", (event) => {
+    if (!event.target.classList.contains("updateChallengeBtn")) return;
+
+    localStorage.setItem("currentChallengeId", event.target.dataset.challengeId);
+
+    const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
+    modal.show();
+
+    
+})
+const updateChallengeForm = document.getElementById("updateChallengeForm");
+
+updateChallengeForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const description = document.getElementById("challengeDescription").value;
+    const difficulty = document.getElementById("challengeDifficulty").value;
+    const points = document.getElementById("challengePoints").value;
+
+    const data = {
+        description,
+        difficulty,
+        points
+    }
+
+    const callback = (responseStatus, responseData) => {
+        console.log(responseStatus);
+        console.log(responseData);
+        if (responseStatus == 200) {
+            const createdChallengesList = document.getElementById('createdChallenges');
+            bootstrap.Modal.getInstance(document.getElementById("updateChallengeModal")).hide();
+            showCompletedChallenges();
+            displayCreatedChallenges(createdChallengesList);
+        }
+    }
+
+    fetchMethod(currentUrl + `/api/challenges/${localStorage.getItem("currentChallengeId")}`, callback, "PUT", data, localStorage.getItem("token"));
+
+})
