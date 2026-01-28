@@ -77,8 +77,8 @@ router.get("/:user_id/boughtPlants",
 )
 // GET /users/{user_id}/completions
 // Retrieves all challenges completed by the user
-router.get('/:user_id/completions',
-    controller.checkUserIdExist,
+router.get('/token/completions',
+    jwtMiddleware.verifyToken,
     controller.getCompletedChallenges
 );
 

@@ -21,5 +21,5 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
-    fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}/completions`, callback);
+    fetchMethod(currentUrl + `/api/user/token/completions`, callback, "GET", null, localStorage.getItem('token'));
 })

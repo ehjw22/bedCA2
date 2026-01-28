@@ -463,7 +463,7 @@ module.exports.getCompletedChallenges = (req, res, next) => {
     }
 
     const data = {
-        id: req.params.user_id
+        id: res.locals.userId
     }
 
     model.getUsersCompletedChallenges(data, callback);
