@@ -1,4 +1,4 @@
-const createdChallengesList = document.getElementById('createdChallenges')
+
 
 function displayCreatedChallenges(createdChallengesList) {
     const callback = (responseStatus, responseData) => {
@@ -35,14 +35,21 @@ function displayCreatedChallenges(createdChallengesList) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const createdChallengesList = document.getElementById('createdChallenges')
     displayCreatedChallenges(createdChallengesList);
 })
 
-// document.addEventListener("click", (event) => {
-//     if (event.target.className !== "deleteChallengeBtn") return;
-//     const callback = (responseStatus, responseData) => {
-//         console.log(responseStatus);
-//         console.log(responseData);
-//     }
-//     fetchMethod(currentUrl + `/api/challenges/${localStorage.getItem("userId")}`, callback, "DELETE");
-// })
+document.addEventListener("click", (event) => {
+    if (!event.target.classList.contains("deleteChallengeBtn")) return;
+    const callback = (responseStatus, responseData) => {
+        console.log(responseStatus);
+        console.log(responseData);
+        if (responseStatus == 204) {
+            const createdChallengesList = document.getElementById('createdChallenges')
+            showCompletedChallenges()
+            displayCreatedChallenges(createdChallengesList)
+        }
+
+    }
+    fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE");
+})
