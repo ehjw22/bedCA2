@@ -3,6 +3,7 @@
 // =================================
 const express = require('express');
 const controller = require('../controllers/userController');
+const jwtMiddleware = require('../middlewares/jwtMiddleware');
 
 // =================================
 // CREATING ROUTER
@@ -26,7 +27,10 @@ router.get("/", controller.getAllUsers);
 
 // 3. GET /users/{user_id}
 // Retrieves a specific user by user ID
-router.get("/:user_id", controller.getUserById);
+router.get("/token", 
+    jwtMiddleware.verifyToken,
+    controller.getUserById
+);
 
 // 4. PUT /users/{user_id}
 // Updates user details after validating user identity

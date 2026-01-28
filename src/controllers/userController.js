@@ -72,7 +72,7 @@ Returns 200 on success, 404 if not found, or 500 on error.
 */
 module.exports.getUserById = (req, res, next) => {
 
-    const userId = Number(req.params.user_id);
+    const userId = Number(req.params.user_id || res.locals.userId);
 
     if (isNaN(userId) || userId <= 0) {
         return res.status(400).json({message: "Invalid format for user_id"});
@@ -91,7 +91,7 @@ module.exports.getUserById = (req, res, next) => {
         }
     }
 
-    const data = {user_id: req.params.user_id};
+    const data = {user_id: req.params.user_id || res.locals.userId};
 
     model.readUserById(data, callback);
 }

@@ -32,7 +32,9 @@ const displayUserStats = function() {
         userStatsList.appendChild(displayItem);
     }
 
-    fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}`, callback);
+    fetchMethod(currentUrl + `/api/user/token`, callback, "GET", null, localStorage.getItem("token"));
+    // fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}`, callback, null, localStorage.getItem("token"));
+
 }
 
 document.addEventListener("DOMContentLoaded", function() {
