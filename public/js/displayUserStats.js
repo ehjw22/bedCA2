@@ -8,24 +8,24 @@ const displayUserStats = function() {
         const displayItem = document.createElement("div");
         displayItem.className = "row g-5";
         displayItem.innerHTML = `
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
             <div class="stat-box h-100">
             <div class="stat-title">Quests Completed</div>
-            <div class="stat-value glow">${responseData.total_challenges_completed}</div>
+            <h3 class="stat-value glow">${responseData.total_challenges_completed}</h3>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
             <div class="stat-box h-100">
             <div class="stat-title">Total Points</div>
-            <div class="stat-value glow">${responseData.points}</div>
+            <h3 class="stat-value glow">${responseData.points}</h3>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6">
             <div class="stat-box h-100">
             <div class="stat-title">Total Experience</div>
-            <div class="stat-value glow">${responseData.exp}</div>
+            <h3 class="stat-value glow">${responseData.exp}</h3>
             </div>
         </div>
         `;
