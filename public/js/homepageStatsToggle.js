@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const loginDiv = document.getElementById("loginDirect");
+document.addEventListener("DOMContentLoaded", toggleLoginNStats());
+
+function toggleLoginNStats() {
+  const loginDiv = document.getElementById("loginDirect");
     const statsDiv = document.getElementById("statisticsCard")
   // Check if token exists in local storage
   const token = localStorage.getItem("token");
@@ -13,4 +15,4 @@ document.addEventListener("DOMContentLoaded", function () {
     loginDiv.classList.remove("d-none");
     statsDiv.classList.add("d-none")
   }
-});
+}
