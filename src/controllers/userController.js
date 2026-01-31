@@ -415,7 +415,7 @@ module.exports.getAllPlanets = (req, res, next) => {
     }
 
     const data = {
-        id: req.params.user_id
+        id: res.locals.userId
     }
 
     model.getPlanets(data, callback);

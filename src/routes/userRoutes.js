@@ -59,8 +59,8 @@ router.get("/:user_id/badges",
 
 // GET /users/{user_id}/planets
 // Retrieves all planets unlocked by the user
-router.get("/:user_id/planets", 
-    controller.checkUserIdExist,
+router.get("/token/planets", 
+    jwtMiddleware.verifyToken,
     controller.getAllPlanets
 );
 
