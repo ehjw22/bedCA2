@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <hr>
                 <div class="mt-auto">
                     <p class="card-text text-center">${planet.description}</p>
-                    <p class="card-text text-center">Unlock Level: ${planet.unlock_level} Points</p>
-                    <button class="btn btn-primary w-100 visitPlanetBtn" data-planet-id="${planet.planet_id}">Visit Planet</button>
+                    <a href="singlePlanetInfo.html?planet_id=${planet.planet_id}" class="btn btn-primary w-100 visitPlanetBtn" data-planet-id="${planet.planet_id}">Visit Planet</a>
                 </div>    
             </div>
             `;
@@ -23,5 +22,5 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
-    fetchMethod(currentUrl + "/api/planets", callback);
+    fetchMethod(currentUrl + "/api/user/token/planets", callback, "GET", null, localStorage.getItem("token"));
 })
