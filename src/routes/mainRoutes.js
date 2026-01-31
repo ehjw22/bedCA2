@@ -21,7 +21,7 @@ const router = express.Router();
 // DEFINE ROUTES
 // =================================
 router.post("/login", userController.login, bcryptMiddleware.comparePassword, jwtMiddleware.generateToken, userController.confirmLogin, jwtMiddleware.sendToken);
-router.post("/register", userController.checkUsernameOrEmailExist, bcryptMiddleware.hashPassword, userController.register, jwtMiddleware.generateToken, jwtMiddleware.sendToken);
+router.post("/register", userController.checkUsernameOrEmailExist, bcryptMiddleware.hashPassword, userController.register, userController.unlockPlanets, jwtMiddleware.generateToken, jwtMiddleware.sendToken);
 router.use('/user', userRoutes);
 router.use('/challenges', challengesRoutes);
 router.use('/challenges', completionRoutes);

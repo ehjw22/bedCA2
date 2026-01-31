@@ -446,3 +446,14 @@ module.exports.getUsersCreatedChallenges = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.unlockUserPlanets = (data, callback) => {
+    const SQLSTATEMENT = `
+    INSERT INTO userplanet (user_id, planet_id)
+    VALUES (?, 1);
+    `;
+
+    const VALUES = [data.user_id];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}

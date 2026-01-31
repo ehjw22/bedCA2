@@ -918,3 +918,19 @@ module.exports.getUserCreatedChallenges = (req, res, next) => {
 
     model.getUsersCreatedChallenges(data, callback);
 }
+
+module.exports.unlockPlanets = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            return res.status(500).json(error);
+        } else {
+            next();
+        }
+    }
+
+    const data = {
+        user_id: res.locals.userId
+    }
+
+    model.unlockUserPlanets(data, callback);
+}
