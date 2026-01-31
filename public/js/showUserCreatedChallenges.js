@@ -1,5 +1,3 @@
-
-
 function displayCreatedChallenges(createdChallengesList) {
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
@@ -51,7 +49,7 @@ document.addEventListener("click", (event) => {
         }
 
     }
-    fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE");
+    fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
 })
 
 document.addEventListener("click", (event) => {
