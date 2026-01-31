@@ -918,7 +918,7 @@ module.exports.getUserCreatedChallenges = (req, res, next) => {
     model.getUsersCreatedChallenges(data, callback);
 }
 
-module.exports.unlockPlanets = (req, res, next) => {
+module.exports.unlockPlanetsFirstTime = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
             return res.status(500).json(error);

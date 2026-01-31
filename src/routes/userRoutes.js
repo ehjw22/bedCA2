@@ -42,14 +42,6 @@ router.put("/:user_id",
     controller.sendResponse
 );
 
-// // POST /users/login
-// // Authenticates a user and records login activity
-// router.post("/login", 
-//     controller.getUserId,
-//     controller.checkPassword,
-//     controller.confirmLogin
-// );
-
 // GET /users/{user_id}/badges
 // Retrieves all badges earned by the user
 router.get("/:user_id/badges", 

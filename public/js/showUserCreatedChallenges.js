@@ -15,7 +15,7 @@ function displayCreatedChallenges(createdChallengesList) {
                     <p class="card-text text-center">Points: ${challenge.points} Points</p>
                     <div class="row g-1">
                         <div class="col-6">
-                            <button class="p-2 btn w-100 btn-primary deleteChallengeBtn" data-challenge-id="${challenge.challenge_id}">Delete</button>
+                            <button class="p-2 btn w-100 btn-danger deleteChallengeBtn" data-challenge-id="${challenge.challenge_id}">Delete</button>
                         </div>
                         <div class="col-6">
                             <button class="p-2 btn w-100 col-6 btn-primary updateChallengeBtn" data-challenge-id="${challenge.challenge_id}">Update</button>
@@ -46,6 +46,7 @@ document.addEventListener("click", (event) => {
             const createdChallengesList = document.getElementById('createdChallenges')
             showCompletedChallenges()
             displayCreatedChallenges(createdChallengesList)
+            showToast("Challenge Successfully Deleted")
         }
 
     }
@@ -62,6 +63,7 @@ document.addEventListener("click", (event) => {
 
     
 })
+
 const updateChallengeForm = document.getElementById("updateChallengeForm");
 
 updateChallengeForm.addEventListener("submit", (e) => {
