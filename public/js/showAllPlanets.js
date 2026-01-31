@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <hr>
                 <div class="mt-auto">
                     <p class="card-text text-center">${planet.description}</p>
-                    <a href="singlePlanetInfo.html?planet_id=${planet.planet_id}" class="btn btn-primary w-100 visitPlanetBtn" data-planet-id="${planet.planet_id}">Visit Planet</a>
+                    <a href="singlePlanetInfo.html?planet_id=${planet.planetNumber}" class="btn btn-primary w-100 visitPlanetBtn" data-planet-id="${planet.planetNumber}">Visit Planet</a>
                 </div>    
             </div>
             `;
