@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", toggleNavbar());
+
+function toggleNavbar() {
   const loginButton = document.getElementById("loginButton");
   const registerButton = document.getElementById("registerButton");
   const profileButton = document.getElementById("profileButton");
@@ -26,4 +28,4 @@ document.addEventListener("DOMContentLoaded", function () {
     // localStorage.removeItem("userId")
     window.location.href = "index.html";
   });
-});
+}

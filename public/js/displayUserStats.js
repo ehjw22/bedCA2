@@ -34,6 +34,7 @@ const displayUserStats = function() {
         } else if (responseStatus == 401) {
             localStorage.removeItem('token');
             toggleLoginNStats()
+            toggleNavbar();
         }
         
     }
