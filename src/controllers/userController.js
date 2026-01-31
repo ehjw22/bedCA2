@@ -586,7 +586,7 @@ Returns 404 if not owned or proceeds to next middleware.
 module.exports.checkUserOwnsPlanet = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
-            console.error("Error checkUserOwnsPlant:", error);
+            console.error("Error checkUserOwnsPlanet:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
             if (results.length === 0) {
@@ -640,7 +640,7 @@ Returns 204 on success, 403 if not owned, or 500 on error.
 module.exports.deleteUserOwnedPlant = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
-            console.error("Error deleteUserOwnedPlant:", error);
+            console.error("Error deleteUserOwnedPlanet:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
             if (results.affectedRows === 0) {
@@ -652,7 +652,7 @@ module.exports.deleteUserOwnedPlant = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.params.user_id,
+        user_id: res.locals.userId,
         plant_id: req.params.plant_id
     }
 
@@ -750,19 +750,18 @@ module.exports.checkUserOwnsPlant = (req, res, next) => {
             console.error("Error checkUserOwnsPlant:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
-            if (results.length === 0 || results[0].quantity <= 0) {
-                return res.status(403).json({message: "You do not own this plant"});
+            if (results.length == 0) {
+                return res.status(403).json({message: "You do not own this plant", user_id: res.locals.userId});
             }
             next();
         }
     }
-
     const data = {
         plant_id: req.params.plant_id,
-        user_id: req.params.user_id
+        user_id: res.locals.userId
     }
 
-    model.getUserOwnedPlants(data, callback);
+    model.getUserPlantedPlants(data, callback);
 }
 
 /* 

@@ -82,6 +82,15 @@ router.get('/token/completions',
     controller.getCompletedChallenges
 );
 
+// DELETE /users/{user_id}/plants/{plant_id}
+// Removes a plant owned by the user
+router.delete('/token/plants/:plant_id',
+    jwtMiddleware.verifyToken,
+    controller.checkPlantIdExist,
+    controller.checkUserOwnsPlant,
+    controller.deleteUserOwnedPlant
+);
+
 // POST /users/{user_id}/plants/{plant_id}/plant
 // Plants a owned plant on a specific planet
 router.post('/:user_id/plants/:plant_id/plant', 
@@ -93,14 +102,7 @@ router.post('/:user_id/plants/:plant_id/plant',
     controller.plantPlant
 );
 
-// DELETE /users/{user_id}/plants/{plant_id}
-// Removes a plant owned by the user
-router.delete('/:user_id/plants/:plant_id',
-    controller.checkUserIdExist,
-    controller.checkPlantIdExist,
-    controller.checkUserOwnsPlant,
-    controller.deleteUserOwnedPlant
-);
+
 
 // POST /{user_id}/plants/{plant_id}/buy
 // Allows a user to purchase a plant

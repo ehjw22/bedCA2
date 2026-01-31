@@ -315,7 +315,8 @@ module.exports.checkUserOwnsPlant = (data, callback) => {
 module.exports.deletePlantOwnedByUser = (data, callback) => {
     const SQLSTATEMENT = `
     DELETE FROM userplant
-    WHERE plant_id = ? AND user_id = ?;
+    WHERE plant_id = ? AND user_id = ?
+    LIMIT 1;
     `;
 
     const VALUES = [data.plant_id, data.user_id];
@@ -384,6 +385,17 @@ module.exports.purchasePlant = (data, callback) => {
 module.exports.getUserOwnedPlants = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT * FROM UserBoughtPlants
+    WHERE user_id = ? AND plant_id = ?;
+    `;
+
+    const VALUES = [data.user_id, data.plant_id];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}
+
+module.exports.getUserPlantedPlants = (data, callback) => {
+    const SQLSTATEMENT = `
+    SELECT * FROM userplant
     WHERE user_id = ? AND plant_id = ?;
     `;
 
