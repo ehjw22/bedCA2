@@ -147,6 +147,8 @@ module.exports.getPlanets = (data, callback) => {
 module.exports.getPlants = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT 
+        planet.name as planetName,
+        plant.name as plantName,
         userplant.*,
         LEAST(
             FLOOR(TIMESTAMPDIFF(DAY, userplant.planted_on, NOW())),
@@ -154,6 +156,7 @@ module.exports.getPlants = (data, callback) => {
         ) AS growth_stage
     FROM UserPlant
     JOIN Plant ON userplant.plant_id = plant.plant_id
+    JOIN planet on userplant.planet_id = planet.planet_id
     WHERE userplant.user_id = ?;
     `;
 

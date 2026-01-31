@@ -437,7 +437,7 @@ module.exports.getAllPlants = (req, res, next) => {
     }
 
     const data = {
-        id: req.params.user_id
+        id: res.locals.userId
     }
 
     model.getPlants(data, callback);

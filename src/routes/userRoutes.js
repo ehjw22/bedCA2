@@ -66,8 +66,8 @@ router.get("/token/planets",
 
 // GET /users/{user_id}/plants
 // Retrieves all plants owned by the user
-router.get("/:user_id/plants",
-    controller.checkUserIdExist,
+router.get("/token/plants",
+    jwtMiddleware.verifyToken,
     controller.getAllPlants
 );
 
