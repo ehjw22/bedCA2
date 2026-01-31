@@ -3,37 +3,42 @@ const displayUserStats = function() {
         console.log("Response Status:", responseStatus);
         console.log("Response Data:", responseData);
 
-        const userStatsList = document.getElementById("statisticsList")
-        userStatsList.innerHTML = "";
-        const displayItem = document.createElement("div");
-        displayItem.className = "row g-5";
-        displayItem.innerHTML = `
-        <div class="col-lg-4 col-md-6">
-            <div class="stat-box h-100">
-            <div class="stat-title">Quests Completed</div>
-            <h3 class="stat-value glow">${responseData.total_challenges_completed}</h3>
+        if (responseStatus == 200) {
+            const userStatsList = document.getElementById("statisticsList")
+            userStatsList.innerHTML = "";
+            const displayItem = document.createElement("div");
+            displayItem.className = "row g-5";
+            displayItem.innerHTML = `
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-box h-100">
+                <div class="stat-title">Quests Completed</div>
+                <h3 class="stat-value glow">${responseData.total_challenges_completed}</h3>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6">
-            <div class="stat-box h-100">
-            <div class="stat-title">Total Points</div>
-            <h3 class="stat-value glow">${responseData.points}</h3>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-box h-100">
+                <div class="stat-title">Total Points</div>
+                <h3 class="stat-value glow">${responseData.points}</h3>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4 col-md-6">
-            <div class="stat-box h-100">
-            <div class="stat-title">Total Experience</div>
-            <h3 class="stat-value glow">${responseData.exp}</h3>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-box h-100">
+                <div class="stat-title">Total Experience</div>
+                <h3 class="stat-value glow">${responseData.exp}</h3>
+                </div>
             </div>
-        </div>
-        `;
-        userStatsList.appendChild(displayItem);
+            `;
+            userStatsList.appendChild(displayItem);
+        } else if (responseStatus == 401) {
+            localStorage.removeItem('token');
+            toggleLoginNStats()
+        }
+        
     }
 
     fetchMethod(currentUrl + `/api/user/token`, callback, "GET", null, localStorage.getItem("token"));
-    // fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}`, callback, null, localStorage.getItem("token"));
 
 }
 
