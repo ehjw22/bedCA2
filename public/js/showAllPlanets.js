@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="mt-auto">
                     <p class="card-text text-center">${planet.description}</p>
                     <p class="card-text text-center">Unlock Level: ${planet.unlock_level} Points</p>
+                    <button class="btn btn-primary w-100 visitPlanetBtn" data-planet-id="${planet.planet_id}">Visit Planet</button>
                 </div>    
             </div>
             `;
