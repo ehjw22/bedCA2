@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
             displayItem.innerHTML = `
             <div class="card h-100 d-flex flex-column p-3">
+                <img src="../images/${planet.planetImage}" class="card-img-top mb-2" style="height: 200px; object-fit: cover;">
                 <h4 class="card-title">${planet.name}</h4>
                 <hr>
                 <div class="mt-auto">

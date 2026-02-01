@@ -132,7 +132,8 @@ module.exports.getPlanets = (data, callback) => {
     SELECT
         planet.planet_id as planetNumber,
         planet.name,
-        planet.description
+        planet.description,
+        planet.planetImage as planetImage
     FROM userplanet
     INNER JOIN planet ON planet.planet_id = userplanet.planet_id
     WHERE userplanet.user_id = ?;

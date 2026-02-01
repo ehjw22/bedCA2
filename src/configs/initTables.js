@@ -167,11 +167,11 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         (1, 2), 
         (1, 3);
 
-        INSERT INTO Planet (name, unlock_level, description) VALUES
-        ("Aurelia", 1, "Starter planet for new gardeners"),
-        ("Crimsonis", 2, "Rocky planet with rare flora"),
-        ("Zephyra", 3, "Windy planet for fast growth"),
-        ("Lumina", 4, "High-level glowing planet");
+        INSERT INTO Planet (name, unlock_level, description, planetImage) VALUES
+        ("Aurelia", 1, "Starter planet for new gardeners", "planet1.png"),
+        ("Crimsonis", 2, "Rocky planet with rare flora", "planet2.png"),
+        ("Zephyra", 3, "Windy planet for fast growth", "planet3.png"),
+        ("Lumina", 4, "High-level glowing planet", "planet4.png");
 
         INSERT INTO UserPlanet (user_id, planet_id) VALUES
         (1, 1);
