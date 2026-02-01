@@ -315,11 +315,10 @@ module.exports.checkUserOwnsPlant = (data, callback) => {
 module.exports.deletePlantOwnedByUser = (data, callback) => {
     const SQLSTATEMENT = `
     DELETE FROM userplant
-    WHERE plant_id = ? AND user_id = ?
-    LIMIT 1;
+    WHERE user_plant_id = ?;
     `;
 
-    const VALUES = [data.plant_id, data.user_id];
+    const VALUES = [data.user_plant_id];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }

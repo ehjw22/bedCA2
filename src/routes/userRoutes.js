@@ -76,10 +76,10 @@ router.get('/token/completions',
 
 // DELETE /users/{user_id}/plants/{plant_id}
 // Removes a plant owned by the user
-router.delete('/token/plants/:plant_id',
+router.delete('/token/plants/:user_plant_id',
     jwtMiddleware.verifyToken,
-    controller.checkPlantIdExist,
-    controller.checkUserOwnsPlant,
+    // controller.checkPlantIdExist,
+    // controller.checkUserOwnsPlant,
     controller.deleteUserOwnedPlant
 );
 
@@ -98,8 +98,8 @@ router.post('/:user_id/plants/:plant_id/plant',
 
 // POST /{user_id}/plants/{plant_id}/buy
 // Allows a user to purchase a plant
-router.post('/:user_id/plants/:plant_id/buy', 
-    controller.checkUserIdExist,
+router.post('/token/plants/:plant_id/buy', 
+    jwtMiddleware.verifyToken,
     controller.checkPlantIdExist,
     controller.checkUserCanBuyPlant,
     controller.buyPlant

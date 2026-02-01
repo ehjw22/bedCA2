@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 showMessageToast(responseData.message, "Error")
             }
         }
-        fetchMethod(currentUrl + `/api/user/${localStorage.getItem("userId")}/plants/${event.target.dataset.plantId}/buy`, callback, "POST")
+        fetchMethod(currentUrl + `/api/user/token/plants/${event.target.dataset.plantId}/buy`, callback, "POST", null, localStorage.getItem("token"))
 
     })
 

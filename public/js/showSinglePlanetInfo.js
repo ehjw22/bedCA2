@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <button class="btn btn-sm btn-secondary cancel-delete">Cancel</button>
                                 </div>
                             '
-                            data-plant-id="${plants.plant_id}"
+                            data-userplant-id="${plants.user_plant_id}"
                             >
                             Delete
                         </button>
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
                         }
                         console.log(btn.dataset.plantId)
-                        fetchMethod(currentUrl + `/api/user/token/plants/${btn.dataset.plantId}`, callback, "DELETE", null, localStorage.getItem("token"));
+                        fetchMethod(currentUrl + `/api/user/token/plants/${btn.dataset.userplantId}`, callback, "DELETE", null, localStorage.getItem("token"));
                     });
                 });
             }

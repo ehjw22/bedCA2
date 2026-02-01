@@ -520,9 +520,9 @@ Returns 400 for invalid ID, 404 if not found, or proceeds to next middleware.
 */
 module.exports.checkPlantIdExist = (req, res, next) => {
 
-    const inputPlantId = Number(req.params.plant_id);
+    const inputId = Number(req.params.plant_id);
 
-    if (isNaN(inputPlantId) || inputPlantId <= 0) {
+    if (isNaN(inputId) || inputId <= 0) {
         return res.status(400).json({message: "Invalid format for plant ID"});
     }
 
@@ -540,7 +540,7 @@ module.exports.checkPlantIdExist = (req, res, next) => {
     }
 
     const data = {
-        id: inputPlantId
+        id: inputId
     }
 
     model.checkPlantExist(data, callback);
@@ -652,8 +652,7 @@ module.exports.deleteUserOwnedPlant = (req, res, next) => {
     }
 
     const data = {
-        user_id: res.locals.userId,
-        plant_id: req.params.plant_id
+        user_plant_id: req.params.user_plant_id
     }
 
     model.deletePlantOwnedByUser(data, callback);
@@ -709,7 +708,7 @@ module.exports.checkUserCanBuyPlant = (req, res, next) => {
 
     const data = {
         plant_id: req.params.plant_id,
-        user_id: req.params.user_id
+        user_id: res.locals.userId
     }
 
     model.getUserNPlantInfo(data, callback);
@@ -723,7 +722,7 @@ Returns 201 on success or 500 on error.
 module.exports.buyPlant = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
-            console.error("Error checkUserCanBuyPlant:", error);
+            console.error("Error buyPlant:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
             return res.status(201).json({message: "Plant purchased successfully"});
@@ -732,7 +731,7 @@ module.exports.buyPlant = (req, res, next) => {
 
     const data = {
         plant_id: req.params.plant_id,
-        user_id: req.params.user_id,
+        user_id: res.locals.userId,
         plant_cost: res.locals.UserNPlantInfo.plant_cost
     }
 
