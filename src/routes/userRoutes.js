@@ -44,8 +44,8 @@ router.put("/:user_id",
 
 // GET /users/{user_id}/badges
 // Retrieves all badges earned by the user
-router.get("/:user_id/badges", 
-    controller.checkUserIdExist,
+router.get("/token/badges", 
+    jwtMiddleware.verifyToken,
     controller.getAllBadges
 );
 
@@ -63,7 +63,7 @@ router.get("/token/plants",
     controller.getAllPlants
 );
 
-router.get("/:user_id/boughtPlants", 
+router.get("/token/boughtPlants", 
     jwtMiddleware.verifyToken,
     controller.getUserBoughtPlants
 )
