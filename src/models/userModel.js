@@ -158,10 +158,10 @@ module.exports.getPlants = (data, callback) => {
     FROM UserPlant
     JOIN Plant ON userplant.plant_id = plant.plant_id
     JOIN planet on userplant.planet_id = planet.planet_id
-    WHERE userplant.user_id = ?;
+    WHERE userplant.user_id = ? AND planet.planet_id = ?;
     `;
 
-    const VALUES = [data.id];
+    const VALUES = [data.id, data.planet_id];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
