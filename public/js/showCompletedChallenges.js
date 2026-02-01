@@ -36,9 +36,9 @@ function showCompletedChallenges () {
             completedChallengesList.innerHTML = "";
             displayItem.innerHTML = `
                 <h2 class="text-center">No challenges completed yet.</h2>
-                <h2 class="text-center">Compelte a challenge to see your progress here</h2>
+                <h2 class="text-center">Complete a challenge to see your progress here</h2>
             `;
-            completedChallengesList.append(displayItem);
+            completedChallengesList.appendChild(displayItem);
         }
         
     }
