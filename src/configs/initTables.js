@@ -97,7 +97,8 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
             planet_id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             unlock_level INT NOT NULL,
-            description TEXT
+            description TEXT,
+            planetImage VARCHAR(255)
         );
 
         CREATE TABLE UserPlanet (
@@ -112,7 +113,8 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
             name VARCHAR(100),
             growth_time_days INT,
             plant_cost INT DEFAULT 10,
-            unlock_level INT NOT NULL
+            unlock_level INT NOT NULL,
+            plantImage VARCHAR(255)
         );
 
         CREATE TABLE UserPlant (
@@ -174,12 +176,12 @@ bcrypt.hash('1234', saltRounds, (error, hash) => {
         INSERT INTO UserPlanet (user_id, planet_id) VALUES
         (1, 1);
 
-        INSERT INTO Plant (name, growth_time_days, plant_cost, unlock_level) VALUES
-        ("Cosmo Cactus", 3, 10, 1),
-        ("Lunar Lily", 5, 15, 1),
-        ("Solar Sunflower", 4, 12, 1),
-        ("Starfruit Tree", 6, 20, 2),
-        ("Nebula Orchid", 7, 25, 3);
+        INSERT INTO Plant (name, growth_time_days, plant_cost, unlock_level, plantImage) VALUES
+        ("Cosmo Cactus", 3, 10, 1, "cactusImage.png"),
+        ("Lunar Lily", 5, 15, 1, "lily.png"),
+        ("Solar Sunflower", 4, 12, 1, "sunflowerImage.png"),
+        ("Starfruit Tree", 6, 20, 2, "nature.png"),
+        ("Nebula Orchid", 7, 25, 3, "orchid.png");
 
         INSERT INTO UserBoughtPlants (user_id, plant_id, quantity) VALUES
         (1, 1, 1),

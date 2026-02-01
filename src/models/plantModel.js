@@ -10,7 +10,8 @@ module.exports.getAllPlants = (callback) => {
         plant_id,
         name,
         growth_time_days,
-        plant_cost 
+        plant_cost,
+        plantImage
     FROM plant;
     `;
 
