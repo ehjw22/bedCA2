@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
+    displayAllPlantedPlants();
+})
+
+function displayAllPlantedPlants () {
     url = new URL(document.URL);
     const urlParams = url.searchParams;
     const planetId = urlParams.get("planet_id");
@@ -12,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const planetNameElement = document.getElementById("planetName");
         planetInfo.innerHTML = "";
         planetNameElement.textContent = planetName;
+        planetInfo.appendChild(addPlantCard);
+        generateSelectOptions();
+        plantPlant(planetId);
         if (responseData.length == 0) {
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
@@ -19,8 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
             `
             planetInfo.appendChild(displayItem)
         } else {
-            planetInfo.appendChild(addPlantCard);
-            generateSelectOptions();
             responseData.forEach(plants => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -97,4 +102,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     fetchMethod(currentUrl + `/api/user/token/plants/${planetId}`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
-})
+}

@@ -395,7 +395,7 @@ module.exports.getUserOwnedPlants = (data, callback) => {
 
 module.exports.getUserPlantedPlants = (data, callback) => {
     const SQLSTATEMENT = `
-    SELECT * FROM userplant
+    SELECT * FROM userboughtplants
     WHERE user_id = ? AND plant_id = ?;
     `;
 

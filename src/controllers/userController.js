@@ -751,7 +751,7 @@ module.exports.checkUserOwnsPlant = (req, res, next) => {
             return res.status(500).json({message: "Internal server error"});
         } else {
             if (results.length == 0) {
-                return res.status(403).json({message: "You do not own this plant", user_id: res.locals.userId});
+                return res.status(403).json({message: "You do not own this plant"});
             }
             next();
         }
