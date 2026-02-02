@@ -9,7 +9,7 @@ addPlantCard.innerHTML = `
     <hr>
 
     <form id="plantForm" class="d-flex flex-column h-100">
-
+        <h5 id="errMsg"></h5>
         <div class="mb-3">
             <select class="form-select" name="plant_id" id="plantPlantSelect" required>
                 <!-- dynamically generated options -->
@@ -30,17 +30,31 @@ addPlantCard.innerHTML = `
 `
 function generateSelectOptions () {
     const callback = (responseStatus, responseData) => {
-        console.log(responseData);
-        const selectBox = document.getElementById("plantPlantSelect")
-        selectBox.innerHTML = `<option value="" disabled selected hidden>Select Plant</option>`;
-        responseData.forEach(plant => {
-            if (plant.quantity != 0) {
-                const option = document.createElement("option");
-                option.value = plant.plant_id;
-                option.textContent = plant.name;
-                selectBox.appendChild(option)
+        console.log(responseStatus)
+        console.log(responseData)
+        let noOptions = true
+        if (responseStatus == 200) {
+            const selectBox = document.getElementById("plantPlantSelect")
+            if (responseData.length != 0) {
+                
+                selectBox.innerHTML = `<option value="" disabled selected hidden>Select Plant</option>`;
+                responseData.forEach(plant => {
+                    if (plant.quantity != 0) {
+                        const option = document.createElement("option");
+                        option.value = plant.plant_id;
+                        option.textContent = plant.name;
+                        selectBox.appendChild(option)
+                        noOptions = false
+                    }
+                })
+            } 
+            if (noOptions) {
+                const messageText = document.getElementById("errMsg");
+                messageText.textContent = "Buy plants to plant them here";
+                selectBox.disabled = true;
             }
-        })
+        }
+        
     }
     fetchMethod(currentUrl + `/api/user/token/boughtPlants`, callback, "GET", null, localStorage.getItem("token"));
 }
