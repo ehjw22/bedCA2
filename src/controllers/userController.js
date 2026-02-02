@@ -599,7 +599,7 @@ module.exports.checkUserOwnsPlanet = (req, res, next) => {
     }
 
     const data = {
-        user_id: req.params.user_id,
+        user_id: res.locals.userId,
         planet_id: req.body.planet_id
     }
 
@@ -625,7 +625,7 @@ module.exports.plantPlant = (req, res, next) => {
     };
 
     const data = {
-        user_id: req.params.user_id,
+        user_id: res.locals.userId,
         plant_id: req.params.plant_id,
         planet_id: req.body.planet_id
     };

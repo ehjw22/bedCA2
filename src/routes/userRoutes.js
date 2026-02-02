@@ -85,8 +85,8 @@ router.delete('/token/plants/:user_plant_id',
 
 // POST /users/{user_id}/plants/{plant_id}/plant
 // Plants a owned plant on a specific planet
-router.post('/:user_id/plants/:plant_id/plant', 
-    controller.checkUserIdExist,
+router.post('/token/plants/:plant_id/plant', 
+    jwtMiddleware.verifyToken,
     controller.checkPlantIdExist,
     controller.checkPlanetIdExist,
     controller.checkUserOwnsPlanet,
