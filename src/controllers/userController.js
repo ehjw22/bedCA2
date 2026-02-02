@@ -165,9 +165,9 @@ module.exports.updateUser = (req, res, next) => {
 
     const inputEmail = req.body.email;
 
-    if (isNaN(points) || points < 0) {
-        return res.status(400).json({message: "Invalid format for points"});
-    }
+    // if (isNaN(points) || points < 0) {
+    //     return res.status(400).json({message: "Invalid format for points"});
+    // }
 
     const callback = (error, results, fields) => {
         if (error) {
@@ -185,7 +185,7 @@ module.exports.updateUser = (req, res, next) => {
         }
     }
 
-    const data = {user_id: req.params.user_id, username: req.body.username, points: points, email: inputEmail ?? null, newPassword: req.body.newPassword ?? null};
+    const data = {user_id: res.locals.userId, username: req.body.username, points: points, email: inputEmail ?? null, newPassword: req.body.newPassword ?? null};
 
     model.updateUser(data, callback)
 }
@@ -195,7 +195,7 @@ Returns 200 with updated user details.
 */
 module.exports.sendResponse = (req, res, next) => {
     return res.status(200).json({
-        user_id: req.params.user_id,
+        user_id: res.locals.userId,
         username: req.body.username,
         points: req.body.points
     });
@@ -222,7 +222,7 @@ module.exports.checkNameExist = (req, res, next) => {
             res.status(500).json(error);
         } else {
             if (results.length !== 0) {
-                if (results[0].user_id == req.params.user_id) {
+                if (results[0].user_id == res.locals.userId) {
                     return next();
                 }
                 return res.status(409).json({message: "Username already exists"});

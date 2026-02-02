@@ -34,10 +34,11 @@ router.get("/token",
 
 // 4. PUT /users/{user_id}
 // Updates user details after validating user identity
-router.put("/:user_id", 
-    controller.checkUserIdExist,
+router.put("/token", 
+    // controller.checkUserIdExist,
+    jwtMiddleware.verifyToken,
     controller.checkNameExist,
-    controller.checkPassword,
+    // controller.checkPassword,
     controller.updateUser,
     controller.sendResponse
 );

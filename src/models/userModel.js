@@ -46,11 +46,11 @@ module.exports.readUserById = (data, callback) => {
 module.exports.updateUser = (data, callback) => {
     const SQLSTATEMENT = `
     UPDATE user 
-    SET username = ?, points = ?, email = COALESCE(?, email), password = COALESCE(?, password)
+    SET username = ?, email = COALESCE(?, email), password = COALESCE(?, password)
     WHERE user_id = ?; 
     `;
 
-    const VALUES = [data.username, data.points, data.email, data.newPassword, data.user_id];
+    const VALUES = [data.username, data.email, data.newPassword, data.user_id];
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
