@@ -69,14 +69,21 @@ function displayChallenges(challengesList) {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
             displayItem.innerHTML = `
-            <div class="card h-100 d-flex flex-column p-3">
-                <h4 class="card-title">${challenge.description}</h4>
-                <hr>
-                <div class="mt-auto">
-                    <p class="card-text text-center">Points: ${challenge.points} Points</p>
-                    <button class="btn btn-primary w-100 completeChallengebtn" data-challenge-id="${challenge.challenge_id}">Complete</button>
-                </div>    
+            <div class="challenge-card h-100">
+                <h3 class="challenge-title">${challenge.description}</h3>
+                
+                <div class="challenge-meta">
+                    <span class="points-badge">⭐ ${challenge.points} pts</span>
+                    <span class="difficulty-${challenge.difficulty}">
+                        ${challenge.difficulty}
+                    </span>
+                </div>
 
+                <button 
+                class="complete-btn completeChallengebtn"
+                data-challenge-id="${challenge.challenge_id}">
+                Complete
+                </button>
             </div>
             `;
             challengesList.appendChild(displayItem);

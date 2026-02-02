@@ -22,7 +22,8 @@ module.exports.readAllChallenges = (callback) => {
         challenge_id,
         description,
         creator_id,
-        points
+        points,
+        difficulty
     FROM wellnesschallenge;
     `;
 
