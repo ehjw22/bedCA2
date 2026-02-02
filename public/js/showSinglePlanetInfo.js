@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
             `
             planetInfo.appendChild(displayItem)
         } else {
+            planetInfo.appendChild(addPlantCard);
+            generateSelectOptions();
             responseData.forEach(plants => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -81,12 +83,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             console.log(responseData);
                             if (responseStatus == 204) {
                                 showToast("Plant successfully removed");
-                                fetchMethod(currentUrl + `/api/user/token/plants`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
+                                fetchMethod(currentUrl + `/api/user/token/plants/${planetId}`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
                             } else {
                                 showToast(responseData.message, "error");
                             }
                         }
-                        console.log(btn.dataset.plantId)
                         fetchMethod(currentUrl + `/api/user/token/plants/${btn.dataset.userplantId}`, callback, "DELETE", null, localStorage.getItem("token"));
                     });
                 });
