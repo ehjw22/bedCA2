@@ -32,6 +32,7 @@ function generateSelectOptions () {
     const callback = (responseStatus, responseData) => {
         console.log(responseData);
         const selectBox = document.getElementById("plantPlantSelect")
+        selectBox.innerHTML = `<option value="" disabled selected hidden>Select Plant</option>`;
         responseData.forEach(plant => {
             if (plant.quantity != 0) {
                 const option = document.createElement("option");
