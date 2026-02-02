@@ -9,16 +9,21 @@ document.addEventListener("DOMContentLoaded", function() {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
             displayItem.innerHTML = `
-            <div class="card h-100 d-flex flex-column p-3">
-                <img src="../images/${plant.plantImage}" class="card-img-top mb-2" style="height: 150px; object-fit: cover;">
-                <h4 class="card-title">${plant.name}</h4>
-                <hr>
-                <div class="mt-auto">
-                    <p class="card-text text-center">Plant Cost: ${plant.plant_cost} Points</p>
-                    <button class="btn btn-primary w-100 buyPlantBtn" data-plant-id="${plant.plant_id}">Buy</button>
-                </div>    
+            <div class="plant-card h-100">
+                <img src="../images/${plant.plantImage}" class="plant-img">
+                 <div class="plant-body">
+                <h3 class="plant-title">${plant.name}</h3>
 
-            </div>
+                <div class="mt-auto">
+                    <p class="plant-price">Price: ${plant.plant_cost} points</p>
+                    <hr class="divider">
+                    <button 
+                    class="btn btn-buy buyPlantBtn" 
+                    data-plant-id="${plant.plant_id}">
+                    Buy
+                    </button>
+                </div>
+                </div>
             `;
             plantsList.appendChild(displayItem);
         })

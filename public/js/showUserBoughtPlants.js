@@ -16,7 +16,7 @@ const displayAllUserBoughtPlants = function() {
                     const displayItem = document.createElement("div");
                     displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                     displayItem.innerHTML = `
-                    <div class="card h-100 d-flex flex-column p-3">
+                    <div class="plant-info-card h-100 d-flex flex-column p-3">
                         <h4 class="card-title">${plant.name}</h4>
                         <hr>
                         <div class="mt-auto">
