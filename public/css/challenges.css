@@ -4,50 +4,6 @@
     box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
 }
 
-/* Reuse your challenge card styling */
-.challenge-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 20px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease;
-}
-
-.challenge-card:hover {
-  transform: translateY(-4px);
-}
-
-.challenge-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.challenge-desc {
-  font-size: 0.95rem;
-  color: #cfd3ff;
-  flex-grow: 1;
-}
-
-.challenge-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-}
-
-.points-badge {
-  background: rgba(111, 124, 255, 0.2);
-  border: 1px solid #6f7cff;
-  color: #ffffff;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
 .complete-btn {
   margin-top: 14px;
   background: linear-gradient(135deg, #6f7cff, #9b6dff);
