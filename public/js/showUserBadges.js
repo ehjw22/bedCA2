@@ -12,14 +12,15 @@ function displayBadges() {
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                 displayItem.innerHTML = `
-                <div class="card h-100 d-flex flex-column p-3">
-                    <h4 class="card-title">${badge.name}</h4>
-                    <hr>
-                    <div class="mt-auto">
-                        <p class="card-text text-center">${badge.description}</p>
-                        <p class="card-text text-center">${badge.earned_on}</p>
-                    </div>    
+                <div class="badge-card h-100 d-flex flex-column">
+                    <h4 class="badge-title">${badge.name}</h4>
 
+                    <div class="badge-body mt-auto">
+                        <p class="badge-desc text-center">${badge.description}</p>
+                        <p class="badge-date text-center">
+                            Earned on ${badge.earned_on}
+                        </p>
+                    </div>
                 </div>
                 `;
                 badgesList.appendChild(displayItem);
