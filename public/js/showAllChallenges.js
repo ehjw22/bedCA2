@@ -1,3 +1,5 @@
+let currentChallengeId = null;
+
 document.addEventListener("DOMContentLoaded", function() {
     const challengesList = document.getElementById("challengesList");
     const completeForm = document.getElementById("completeForm");
@@ -14,8 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        localStorage.setItem("currentChallengeId", event.target.dataset.challengeId);
-
+        currentChallengeId = event.target.dataset.challengeId
         const modal = new bootstrap.Modal(document.getElementById("completeModal"));
         modal.show();
     })
@@ -26,10 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const difficulty = document.getElementById("difficulty").value;
         const feedback = document.getElementById("feedback").value;
 
-        const challengeId = localStorage.getItem("currentChallengeId");
-
         const data = {
-            challenge_id: challengeId,
+            challenge_id: currentChallengeId,
             details: reflection,
             difficulty,
             feedback
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         fetchMethod(
-            currentUrl + `/api/challenges/${challengeId}`,
+            currentUrl + `/api/challenges/${currentChallengeId}`,
             submitCallback,
             "POST",
             data,
