@@ -1,5 +1,10 @@
-/* for section on user changing usernames */
+#completedChallenges, #createdChallengesContainer, #badgesContainer {
+    background: linear-gradient(135deg, #2b2f77, #1a1d4e);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
+}
 
+/* for section on user changing usernames */
 #profileHeader {
     display: flex;
     flex-direction: column;
@@ -20,4 +25,23 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+}
+
+/* ===== Completed Challenges (Profile) ===== */
+
+.completed-challenge {
+    background: rgba(125, 255, 179, 0.08);
+    border: 1px solid rgba(125, 255, 179, 0.35);
+}
+
+.completed-challenge:hover {
+    transform: translateY(-4px);
+}
+
+.completed-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #7dffb3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
