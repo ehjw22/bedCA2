@@ -29,3 +29,46 @@
     font-weight: bold;
     margin-top: 10px;
 }
+
+/* message if user not logged in */
+#loginDirect {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: linear-gradient(135deg, #2b2f77, #1a1d4e);
+  border-radius: 24px;
+  padding: 40px 30px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 0 35px rgba(138, 43, 226, 0.35);
+}
+
+.login-subtext {
+  color: #cfd3ff;
+  font-size: 1rem;
+}
+
+.btn-register {
+  background: linear-gradient(135deg, #ffd27d, #ffb703);
+  border: none;
+  color: #1a1d4e;
+  font-weight: 700;
+  border-radius: 14px;
+}
+
+.btn-login {
+  background: linear-gradient(135deg, #6f7cff, #9b6dff);
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 14px;
+}
+
+.btn-register:hover,
+.btn-login:hover {
+  opacity: 0.9;
+}
