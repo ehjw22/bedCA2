@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const callback = (responseStatus, responseData) => {
             if (responseStatus == 200) {
                 showToast("Username successfully updated");
-                const usernameText = document.getElementById("currentUsername");
-                usernameText.textContent = newUsername.value;
                 newUsername.value = "";
+                getUserUsername()
             } else {
                 showToast(responseData.message, "Error");
             }

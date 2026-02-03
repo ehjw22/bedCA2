@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", getUserUsername());
+
+function getUserUsername () {
     const callback = (responseStatus, responseData) => {
         console.log(responseData)
         if (responseStatus == 200) {
@@ -10,4 +12,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     fetchMethod(currentUrl + `/api/user/token`, callback, "GET", null, localStorage.getItem("token"))
-})
+}
