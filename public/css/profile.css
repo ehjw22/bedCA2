@@ -1,0 +1,23 @@
+/* for section on user changing usernames */
+
+#profileHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+#usernameDisplay {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #e6e8ff;
+}
+
+#usernameInputField {
+    max-width: 300px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
