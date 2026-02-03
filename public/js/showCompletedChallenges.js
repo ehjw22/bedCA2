@@ -15,7 +15,7 @@ function showCompletedChallenges () {
                     displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                     displayItem.innerHTML = `
                     <div class="challenge-card completed-challenge p-3">
-                        <h4 class="challenge-title">${completion.challenge}</h4>
+                        <h4 class="challenge-title flex-grow-1">${completion.challenge}</h4>
 
                         <div class="challenge-meta">
                             <span class="points-badge">⭐ ${completion.points_earned} pts</span>

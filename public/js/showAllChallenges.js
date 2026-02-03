@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         fetchMethod(
-            currentUrl + `/api/challenges/${currentChallengeIdset}`,
+            currentUrl + `/api/challenges/${currentChallengeId}`,
             submitCallback,
             "POST",
             data,
@@ -69,7 +69,7 @@ function displayChallenges(challengesList) {
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
             displayItem.innerHTML = `
             <div class="challenge-card h-100">
-                <h3 class="challenge-title">${challenge.description}</h3>
+                <h3 class="challenge-title flex-grow-1">${challenge.description}</h3>
                 
                 <div class="challenge-meta">
                     <span class="points-badge">⭐ ${challenge.points} pts</span>
