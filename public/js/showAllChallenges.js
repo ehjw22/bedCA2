@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         fetchMethod(
-            currentUrl + `/api/challenges/${currentChallengeId}`,
+            currentUrl + `/api/challenges/${currentChallengeIdset}`,
             submitCallback,
             "POST",
             data,

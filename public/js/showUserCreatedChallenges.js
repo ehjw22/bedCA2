@@ -53,11 +53,13 @@ document.addEventListener("click", (event) => {
     fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
 })
 
+let currentChallengeId = null;
+
 document.addEventListener("click", (event) => {
     if (!event.target.classList.contains("updateChallengeBtn")) return;
 
-    localStorage.setItem("currentChallengeId", event.target.dataset.challengeId);
-
+    // localStorage.setItem("currentChallengeId", event.target.dataset.challengeId);
+    currentChallengeId = event.target.dataset.challengeId;
     const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
     modal.show();
 
@@ -90,6 +92,6 @@ updateChallengeForm.addEventListener("submit", (e) => {
         }
     }
 
-    fetchMethod(currentUrl + `/api/challenges/${localStorage.getItem("currentChallengeId")}`, callback, "PUT", data, localStorage.getItem("token"));
+    fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "PUT", data, localStorage.getItem("token"));
 
 })
