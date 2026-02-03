@@ -1,0 +1,43 @@
+/* ===== Global Modal Styling (inputs untouched) ===== */
+.modal-content {
+  background: linear-gradient(135deg, #2b2f77, #1a1d4e);
+  border-radius: 20px;
+  border: 1px solid rgba(111, 124, 255, 0.35);
+  box-shadow: 0 0 40px rgba(138, 43, 226, 0.45);
+  color: #ffffff;
+}
+
+/* Header & Title */
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal-title {
+  font-weight: 700;
+  color: #e8eaff;
+}
+
+/* Footer */
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Close button */
+.modal-header .btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* Hover animation for modal */
+.modal.fade .modal-dialog {
+  transform: scale(0.95);
+  transition: transform 0.2s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}
