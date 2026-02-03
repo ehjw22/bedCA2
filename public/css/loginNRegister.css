@@ -1,0 +1,16 @@
+#loginSection, #registerSection {
+    background: linear-gradient(135deg, #2b2f77, #1a1d4e);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
+}
+
+#loginSubmitBtn, #registerSubmitBtn {
+    background: linear-gradient(135deg, #6f7cff, #9b6dff);
+    border: none;
+    color: #ffffff;
+    border-radius: 12px;
+}
+
+#loginSubmitBtn:hover, #registerSubmitBtn:hover {
+    opacity: 0.9;
+}
