@@ -2,7 +2,7 @@ function showToast(message, type="success") {
     const toast = document.getElementById("messageToast");
 
     const toastBody = toast.querySelector(".toast-body");
-    toastBody.textContent = message;
+    toastBody.innerHTML = message;
 
     toastBody.classList.remove("text-bg-success", "text-bg-danger");
 

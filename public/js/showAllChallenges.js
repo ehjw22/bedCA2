@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const token = localStorage.getItem('token');
 
         if (!token) {
-            showToast("Please login/register to complete challenges", "error");
+            showToast(`Please <a href="login.html" class="link-light">login</a>/<a href="register.html" class="link-light">register</a> to complete challenges`, "error");
             return;
         }
 
