@@ -8,21 +8,31 @@ function displayCreatedChallenges(createdChallengesList) {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
             displayItem.innerHTML = `
-            <div class="card h-100 d-flex flex-column p-3">
-                <h4 class="card-title">${challenge.description}</h4>
-                <hr>
-                <div class="mt-auto">
-                    <p class="card-text text-center">Points: ${challenge.points} Points</p>
-                    <div class="row g-1">
-                        <div class="col-6">
-                            <button class="p-2 btn w-100 btn-danger deleteChallengeBtn" data-challenge-id="${challenge.challenge_id}">Delete</button>
-                        </div>
-                        <div class="col-6">
-                            <button class="p-2 btn w-100 col-6 btn-primary updateChallengeBtn" data-challenge-id="${challenge.challenge_id}">Update</button>
-                        </div>
-                    </div>
-                </div>    
+            <div class="challenge-card user-challenge h-100 d-flex flex-column">
+                <h4 class="challenge-title">${challenge.description}</h4>
 
+                <div class="challenge-meta mt-auto">
+                    <span class="points-badge">⭐ ${challenge.points} pts</span>
+                </div>
+
+                <div class="row g-2 mt-3">
+                    <div class="col-6">
+                        <button 
+                        class="btn btn-danger w-100 deleteChallengeBtn"
+                        data-challenge-id="${challenge.challenge_id}"
+                        >
+                        Delete
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button 
+                        class="btn btn-primary w-100 updateChallengeBtn"
+                        data-challenge-id="${challenge.challenge_id}"
+                        >
+                        Update
+                        </button>
+                    </div>
+                </div>
             </div>
             `;
             createdChallengesList.appendChild(displayItem);
@@ -58,7 +68,6 @@ let currentChallengeId = null;
 document.addEventListener("click", (event) => {
     if (!event.target.classList.contains("updateChallengeBtn")) return;
 
-    // localStorage.setItem("currentChallengeId", event.target.dataset.challengeId);
     currentChallengeId = event.target.dataset.challengeId;
     const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
     modal.show();

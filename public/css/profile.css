@@ -45,3 +45,35 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+/* ===== User Created Challenges ===== */
+
+.user-challenge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(111, 124, 255, 0.25);
+}
+
+.user-challenge:hover {
+  transform: translateY(-4px);
+}
+
+/* Buttons spacing + polish */
+.user-challenge .btn {
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.user-challenge .btn-danger {
+  background: linear-gradient(135deg, #ff7d7d, #ff4d4d);
+  border: none;
+}
+
+.user-challenge .btn-primary {
+  background: linear-gradient(135deg, #6f7cff, #9b6dff);
+  border: none;
+}
+
+.user-challenge .btn:hover {
+  opacity: 0.9;
+}
