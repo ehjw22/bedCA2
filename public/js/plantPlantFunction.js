@@ -9,6 +9,8 @@ function plantPlant(planetId) {
                 if (responseStatus == 201) {
                     showToast(responseData.message);
                     displayAllPlantedPlants();
+                } else if (responseStatus == 401) {
+                    handleSessionExpired();
                 }
             }
             const plantId = document.getElementById("plantPlantSelect").value;

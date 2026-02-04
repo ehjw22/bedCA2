@@ -12,7 +12,7 @@ function handleSessionExpired() {
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("goHomeBtn").addEventListener("click", () => {
-        window.location.href = window.location.href;
+        window.location.href = "index.html";
     });
 
     document.getElementById("signInBtn").addEventListener("click", () => {
