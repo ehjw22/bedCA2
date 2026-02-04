@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 displayAllUserBoughtPlants();
                 showMessageToast(responseData.message);
                 console.log("bought successfully");
+            } else if (responseStatus == 401) {
+                handleSessionExpired();
             } else {
                 showMessageToast(responseData.message, "Error")
             }
