@@ -17,11 +17,21 @@ function displayCreatedChallenges(createdChallengesList) {
 
                 <div class="row g-2 mt-3">
                     <div class="col-6">
-                        <button 
-                        class="btn btn-danger w-100 deleteChallengeBtn"
-                        data-challenge-id="${challenge.challenge_id}"
+                        <button
+                            type="button"
+                            class="btn btn-danger deleteChallengeBtn w-100"
+                            data-bs-toggle="popover"
+                            data-bs-html="true"
+                            data-bs-content='
+                                <div class="text-center">
+                                <p class="mb-2">Delete this planet?</p>
+                                <button class="btn btn-sm btn-danger confirm-delete">Yes</button>
+                                <button class="btn btn-sm btn-secondary cancel-delete">Cancel</button>
+                                </div>
+                            '
+                            data-challenge-id="${challenge.challenge_id}"
                         >
-                        Delete
+                            Delete
                         </button>
                     </div>
                     <div class="col-6">
@@ -37,6 +47,46 @@ function displayCreatedChallenges(createdChallengesList) {
             `;
             createdChallengesList.appendChild(displayItem);
         })
+
+        const deleteBtns = document.querySelectorAll(".deleteChallengeBtn");
+
+        deleteBtns.forEach(btn => {
+            if (!btn.dataset.popoverInitialised) {
+                const popover = new bootstrap.Popover(btn, {
+                    trigger: "click",
+                    placement: "bottom",
+                    sanitize: false 
+                });
+
+                btn.dataset.popoverInitialised = true;
+
+                btn.addEventListener("shown.bs.popover", () => {
+                    const popoverElement = document.querySelector(".popover");
+
+                    popoverElement.querySelector(".cancel-delete")
+                    .addEventListener("click", () => popover.hide());
+
+                    popoverElement.querySelector(".confirm-delete")
+                    .addEventListener("click", () => {
+                        popover.hide();
+                        console.log("Delete confirmed");
+                        // call delete API here
+                        const callback = (responseStatus, responseData) => {
+                            console.log(responseStatus);
+                            console.log(responseData);
+                            if (responseStatus == 204) {
+                                const createdChallengesList = document.getElementById('createdChallenges')
+                                showCompletedChallenges()
+                                displayCreatedChallenges(createdChallengesList)
+                                showToast("Challenge Successfully Deleted")
+                            }
+
+                        }
+                        fetchMethod(currentUrl + `/api/challenges/${btn.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
+                    });
+                });
+            }
+        })
     }
 
     fetchMethod(currentUrl +`/api/user/token/challenges`, callback, "GET", null, localStorage.getItem("token"));
@@ -47,21 +97,21 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCreatedChallenges(createdChallengesList);
 })
 
-document.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("deleteChallengeBtn")) return;
-    const callback = (responseStatus, responseData) => {
-        console.log(responseStatus);
-        console.log(responseData);
-        if (responseStatus == 204) {
-            const createdChallengesList = document.getElementById('createdChallenges')
-            showCompletedChallenges()
-            displayCreatedChallenges(createdChallengesList)
-            showToast("Challenge Successfully Deleted")
-        }
+// document.addEventListener("click", (event) => {
+//     if (!event.target.classList.contains("deleteChallengeBtn")) return;
+//     const callback = (responseStatus, responseData) => {
+//         console.log(responseStatus);
+//         console.log(responseData);
+//         if (responseStatus == 204) {
+//             const createdChallengesList = document.getElementById('createdChallenges')
+//             showCompletedChallenges()
+//             displayCreatedChallenges(createdChallengesList)
+//             showToast("Challenge Successfully Deleted")
+//         }
 
-    }
-    fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
-})
+//     }
+//     fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
+// })
 
 let currentChallengeId = null;
 
