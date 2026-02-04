@@ -28,8 +28,7 @@ function showCompletedChallenges () {
                 })
             } 
         } else if (responseStatus == 401) {
-            localStorage.removeItem("token");
-            window.location.href = "login.html";
+            handleSessionExpired();
         } else if (responseStatus == 404) {
             
             const displayItem = document.createElement("div");

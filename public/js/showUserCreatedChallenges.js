@@ -52,7 +52,7 @@ function displayCreatedChallenges(createdChallengesList) {
 
         deleteBtns.forEach(btn => {
             if (!btn.dataset.popoverInitialised) {
-                const popover = new bootstrap.Popover(btn, {
+                const popoverInstance = new bootstrap.Popover(btn, {
                     trigger: "click",
                     placement: "bottom",
                     sanitize: false 
@@ -61,28 +61,34 @@ function displayCreatedChallenges(createdChallengesList) {
                 btn.dataset.popoverInitialised = true;
 
                 btn.addEventListener("shown.bs.popover", () => {
-                    const popoverElement = document.querySelector(".popover");
+                    const popoverElement = popoverInstance.tip;
 
-                    popoverElement.querySelector(".cancel-delete")
-                    .addEventListener("click", () => popover.hide());
+                    const confirmBtn = popoverElement.querySelector(".confirm-delete");
+                    const deleteBtn = popoverElement.querySelector(".cancel-delete")
 
-                    popoverElement.querySelector(".confirm-delete")
-                    .addEventListener("click", () => {
-                        popover.hide();
-                        // call delete API here
-                        const callback = (responseStatus, responseData) => {
-                            console.log(responseStatus);
-                            console.log(responseData);
-                            if (responseStatus == 204) {
-                                const createdChallengesList = document.getElementById('createdChallenges')
-                                showCompletedChallenges()
-                                displayCreatedChallenges(createdChallengesList)
-                                showToast("Challenge Successfully Deleted")
+                    deleteBtn.addEventListener("click", () => popoverInstance.hide());
+
+                    if (!confirmBtn.dataset.listenerAttached) {
+                        confirmBtn.dataset.listenerAttached = true;
+                        confirmBtn.addEventListener("click", () => {
+                            popoverInstance.hide();
+                            const callbackforDelete = (responseStatus, responseData) => {
+                                console.log(responseStatus);
+                                console.log(responseData);
+                                if (responseStatus == 401) {
+                                    handleSessionExpired();
+                                    return
+                                } else if (responseStatus == 204) {
+                                    const createdChallengesList = document.getElementById('createdChallenges')
+                                    showCompletedChallenges()
+                                    displayCreatedChallenges(createdChallengesList)
+                                    showToast("Challenge Successfully Deleted")
+                                }
                             }
-
-                        }
-                        fetchMethod(currentUrl + `/api/challenges/${btn.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
-                    });
+                            fetchMethod(currentUrl + `/api/challenges/${btn.dataset.challengeId}`, callbackforDelete, "DELETE", null, localStorage.getItem("token"));
+                        });
+                    }
+                    
                 });
             }
         })
@@ -96,31 +102,21 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCreatedChallenges(createdChallengesList);
 })
 
-// document.addEventListener("click", (event) => {
-//     if (!event.target.classList.contains("deleteChallengeBtn")) return;
-//     const callback = (responseStatus, responseData) => {
-//         console.log(responseStatus);
-//         console.log(responseData);
-//         if (responseStatus == 204) {
-//             const createdChallengesList = document.getElementById('createdChallenges')
-//             showCompletedChallenges()
-//             displayCreatedChallenges(createdChallengesList)
-//             showToast("Challenge Successfully Deleted")
-//         }
-
-//     }
-//     fetchMethod(currentUrl + `/api/challenges/${event.target.dataset.challengeId}`, callback, "DELETE", null, localStorage.getItem("token"));
-// })
-
 let currentChallengeId = null;
 
 document.addEventListener("click", (event) => {
     if (!event.target.classList.contains("updateChallengeBtn")) return;
 
-    currentChallengeId = event.target.dataset.challengeId;
-    const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
-    modal.show();
-
+    const callback = (responseStatus, responseData) => {
+        if (responseStatus == 200) {
+            currentChallengeId = event.target.dataset.challengeId;
+            const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
+            modal.show();
+        } else if (responseStatus == 401) {
+            handleSessionExpired();
+        }
+    }
+    fetchMethod(currentUrl + "/api/jwt/verify", callback, "GET", null, localStorage.getItem("token"));
     
 })
 

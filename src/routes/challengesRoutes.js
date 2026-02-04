@@ -30,6 +30,7 @@ router.get('/', challengesController.getAllChallenge);
 // 7. DELETE /challenges/{challenge_id}
 // Deletes a challenge after verifying it exists, then removes related user completion records
 router.delete('/:challenge_id', 
+    jwtMiddleware.verifyToken,
     challengesController.checkChallengeExist,
     challengesController.deleteChallengeById,
     completionController.deleteUserCompletion
