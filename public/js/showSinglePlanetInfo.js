@@ -29,13 +29,13 @@ function displayAllPlantedPlants () {
                 );
                 const progressRounded = Math.floor(progress);
                 displayItem.innerHTML = `
-                <div class="card h-100 d-flex flex-column p-3">
+                <div class="plant-card h-100 d-flex flex-column p-3">
                     <img src="../images/${plants.plantImage}" class="card-img-top mb-2" style="height: 150px; object-fit: cover;">
-                    <h4 class="card-title text-center">${plants.plantName}</h4>
+                    <h4 class="plant-title text-center">${plants.plantName}</h4>
                     <hr>
                     <div class="mt-auto">
-                        <p class="card-text text-center">Planted On: ${plants.planted_on}</p>
-                        <div class="mb-2">
+                        <p class="plant-date text-center mb-2">Planted On: ${plants.planted_on}</p>
+                        <div class="plant-progress mb-2">
                             <small class="text-muted">Growth Progress</small>
                             <div class="progress" style="height: 18px;">
                                 <div

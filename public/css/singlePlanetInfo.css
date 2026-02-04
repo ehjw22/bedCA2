@@ -1,0 +1,64 @@
+#planetContainer {
+    background: linear-gradient(135deg, #2b2f77, #1a1d4e); 
+    border-radius: 20px; 
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
+}
+
+/* Plant Card Wrapper */
+.plant-card {
+  background: rgba(255, 255, 255, 0.08); /* subtle translucent background */
+  border-radius: 16px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plant-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.25);
+}
+
+/* Plant Image */
+.plant-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 12px;
+}
+
+/* Plant Title */
+.plant-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+/* Planted On Text */
+.plant-date {
+  font-size: 0.9rem;
+  color: #cfd3ff;
+  text-align: center;
+  margin: 4px 0;
+}
+
+/* Delete Button */
+.plant-delete-btn {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6f7cff, #9b6dff);
+  color: #ffffff;
+  border: none;
+}
+
+.plant-delete-btn:hover {
+  opacity: 0.9;
+}
