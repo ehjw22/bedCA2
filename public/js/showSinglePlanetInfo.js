@@ -74,8 +74,6 @@ function displayAllPlantedPlants () {
             
             })
             
-            
-
             const deleteButtons = document.querySelectorAll(".delete-btn");
 
             deleteButtons.forEach(btn => {
@@ -104,6 +102,8 @@ function displayAllPlantedPlants () {
                                 if (responseStatus == 204) {
                                     showToast("Plant successfully removed");
                                     fetchMethod(currentUrl + `/api/user/token/plants/${planetId}`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
+                                } else if (responseStatus == 401) {
+                                    handleSessionExpired();
                                 } else {
                                     showToast(responseData.message, "error");
                                 }
