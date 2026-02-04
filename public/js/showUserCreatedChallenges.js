@@ -69,7 +69,6 @@ function displayCreatedChallenges(createdChallengesList) {
                     popoverElement.querySelector(".confirm-delete")
                     .addEventListener("click", () => {
                         popover.hide();
-                        console.log("Delete confirmed");
                         // call delete API here
                         const callback = (responseStatus, responseData) => {
                             console.log(responseStatus);

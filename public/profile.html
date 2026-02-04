@@ -65,84 +65,102 @@
     </nav>
 
     <main class="flex-grow-1 container-md">
-        <div class="container mt-3">
-          <h1 id="greetingTitle" class="text-center">Welcome Back <span class="usernameText"></span></h1>
-        </div>
+      <div class="container mt-3">
+        <h1 id="greetingTitle" class="text-center">Welcome Back <span class="usernameText"></span></h1>
+      </div>
 
-        <div id="profileHeader">
-          <div id="usernameDisplay">Username: <span class="usernameText"></span></div>
-            <div id="usernameInputField">
-              <input type="text" class="form-control" id="usernameInput" placeholder="Enter new username">
-              <button class="btn btn-primary" id="changeUsernameBtn">Change</button>
-            </div>
-        </div>
+      <div id="profileHeader">
+        <div id="usernameDisplay">Username: <span class="usernameText"></span></div>
+          <div id="usernameInputField">
+            <input type="text" class="form-control" id="usernameInput" placeholder="Enter new username">
+            <button class="btn btn-primary" id="changeUsernameBtn">Change</button>
+          </div>
+      </div>
 
-        <div id="completedChallenges" class="row mt-3">
-            <h1 class="text-center mt-2 glow">Completed Challenges</h1>
-            <div id="completedChallengesList" class="row">
-
-            </div>
-        </div>
-        <div id="createdChallengesContainer" class="row mt-3">
-          <h1 class="text-center mt-2 glow">Your Created Challenges</h1>
-          <div id="createdChallenges" class="row">
+      <div id="completedChallenges" class="row mt-3">
+          <h1 class="text-center mt-2 glow">Completed Challenges</h1>
+          <div id="completedChallengesList" class="row">
 
           </div>
+      </div>
+      <div id="createdChallengesContainer" class="row mt-3">
+        <h1 class="text-center mt-2 glow">Your Created Challenges</h1>
+        <div id="createdChallenges" class="row">
+
         </div>
+      </div>
 
-        <div class="row mt-3" id="badgesContainer">
-          <h1 class="text-center mt-2 glow">Badges Earned</h1>
-          <div id="badgesEarnedList" class="row">
+      <div class="row mt-3" id="badgesContainer">
+        <h1 class="text-center mt-2 glow">Badges Earned</h1>
+        <div id="badgesEarnedList" class="row">
 
+        </div>
+      </div>
+
+      <div class="toast-container position-fixed bottom-0 start-0 p-3">
+        <div id="messageToast" class="toast text-bg-danger" role="alert">
+          <div class="toast-body">
+            
           </div>
         </div>
+      </div>
 
-        <div class="toast-container position-fixed bottom-0 start-0 p-3">
-          <div id="messageToast" class="toast text-bg-danger" role="alert">
-            <div class="toast-body">
-              
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade" id="updateChallengeModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Update Challenge</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form id="updateChallengeForm">
-                  <div class="modal-body">
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="challengeDescription" placeholder="Challenge Name" required>
-                      <label for="challengeName">Challenge Description</label>
-                    </div>
-
-                    <div class="mb-3">
-                      <select class="form-select" id="challengeDifficulty" required>
-                        <option value="" selected disabled hidden>Select difficulty</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                      </select>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="challengePoints" placeholder="Points Reward" required>
-                      <label for="challengePoints">Points Reward</label>
-                    </div>
-
-                    
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                  </div>
-                </form>
+      <div class="modal fade" id="updateChallengeModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Update Challenge</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
+              <form id="updateChallengeForm">
+                <div class="modal-body">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="challengeDescription" placeholder="Challenge Name" required>
+                    <label for="challengeName">Challenge Description</label>
+                  </div>
+
+                  <div class="mb-3">
+                    <select class="form-select" id="challengeDifficulty" required>
+                      <option value="" selected disabled hidden>Select difficulty</option>
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard">Hard</option>
+                    </select>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="challengePoints" placeholder="Points Reward" required>
+                    <label for="challengePoints">Points Reward</label>
+                  </div>
+
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+              </form>
             </div>
+          </div>
+      </div>
+
+      <div class="modal fade" id="sessionExpiredModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Session Expired</h5>
+            </div>
+            <div class="modal-body">
+              Your session has expired.
+              Please sign in again to continue.
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" id="goHomeBtn">Go Home</button>
+              <button class="btn btn-primary" id="signInBtn">Sign In</button>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <footer class="text-center py-3">
@@ -158,5 +176,6 @@
     <script src="js/showUserBadges.js" type="text/javascript"></script>
     <script src="js/changeUsername.js" type="text/javascript"></script>
     <script src="js/getUsername.js" type="text/javascript"></script>
+    <script src="js/handleTokenExpiry.js" type="text/javascript"></script>
 </body>
 </html>
