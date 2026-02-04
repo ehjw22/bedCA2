@@ -16,9 +16,17 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        currentChallengeId = event.target.dataset.challengeId
-        const modal = new bootstrap.Modal(document.getElementById("completeModal"));
-        modal.show();
+        const callback = (responseStatus, responseData) => {
+            if (responseStatus == 200) {
+                currentChallengeId = event.target.dataset.challengeId
+                const modal = new bootstrap.Modal(document.getElementById("completeModal"));
+                modal.show();
+            } else if (responseStatus == 401) {
+                handleSessionExpired();
+            }
+        }
+
+        fetchMethod(currentUrl + `/api/jwt/verify`, callback, "GET", null, token);
     })
 
     completeForm.addEventListener("submit", (e) => {
