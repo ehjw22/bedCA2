@@ -46,3 +46,39 @@ newChallengeForm.addEventListener("submit", function(e) {
 
     fetchMethod(currentUrl + `/api/challenges`, callback, "POST", data, localStorage.getItem("token"));
 })
+
+const descriptionInput = document.getElementById("challengeDescription");
+const similarBox = document.getElementById("similarChallengesBox"); // a div under the input
+
+let debounceTimer;
+
+descriptionInput.addEventListener("input", function () {
+    const inputText = this.value.trim();
+    console.log(inputText);
+    // clear previous debounce
+    clearTimeout(debounceTimer);
+
+    if (inputText.length < 3) {
+        similarBox.innerHTML = ""; // clear suggestions for short text
+        return;
+    }
+
+    // debounce request by 300ms
+    debounceTimer = setTimeout(() => {
+        const data = { text: inputText };
+
+        const callback = (responseStatus, responseData) => {
+            console.log(responseData)
+            if (responseStatus === 200 && responseData.length > 0) {
+                similarBox.innerHTML = responseData
+                    .map(ch => `<div class="similar-item">${ch.description}</div>`)
+                    .join("");
+            } else {
+                similarBox.innerHTML = "<div class='text-light'>No similar challenges</div>";
+            }
+        }
+
+        fetchMethod(currentUrl + "/api/challenges/similarChallenges", callback, "POST", data);
+
+    }, 300); // 300ms debounce
+});

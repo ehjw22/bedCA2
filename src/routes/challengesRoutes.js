@@ -27,7 +27,7 @@ router.post('/',
 // Retrieves all challenges from the database and returns them 
 router.get('/', challengesController.getAllChallenge);
 
-router.get("/similarChallenges", 
+router.post("/similarChallenges", 
     challengesController.getSimilarChallenges
 )
 
