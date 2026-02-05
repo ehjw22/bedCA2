@@ -1,12 +1,10 @@
 const displayAllUserBoughtPlants = function() {
     const userBoughtPlantsDiv = document.getElementById("boughtPlantsList");
-
+    const userboughtPlantsSection = document.getElementById("userBoughtPlants");
     if (!localStorage.getItem("token")) {
-        const loginText = document.createElement("h2")
-        loginText.textContent = "Login to view bought plants";
-        loginText.classList = "text-center"
-        userBoughtPlantsDiv.appendChild(loginText);
+        userboughtPlantsSection.classList.add("d-none")
     } else {
+        userboughtPlantsSection.classList.remove("d-none")
         const callback = (responseStatus, responseData) => {
             console.log("responseStatus:", responseStatus);
             console.log("responseData:", responseData);
