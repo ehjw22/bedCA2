@@ -15,18 +15,21 @@ document.addEventListener("DOMContentLoaded", function() {
             showToast(`Please <a href="login.html" class="link-light">login</a>/<a href="register.html" class="link-light">register</a> to complete challenges`, "error");
             return;
         }
-
+        currentChallengeId = event.target.dataset.challengeId
         const callback = (responseStatus, responseData) => {
+            console.log(responseData);
+            console.log(responseStatus);
             if (responseStatus == 200) {
-                currentChallengeId = event.target.dataset.challengeId
                 const modal = new bootstrap.Modal(document.getElementById("completeModal"));
                 modal.show();
             } else if (responseStatus == 401) {
                 handleSessionExpired();
+            } else if (responseStatus == 403) {
+                showToast("You cannot complete a challenge you made", "Error")
             }
         }
 
-        fetchMethod(currentUrl + `/api/jwt/verify`, callback, "GET", null, token);
+        fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}/checkCreator`, callback, "GET", null, token);
     })
 
     completeForm.addEventListener("submit", (e) => {

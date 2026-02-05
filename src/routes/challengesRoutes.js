@@ -49,6 +49,12 @@ router.put('/:challenge_id',
     challengesController.updateChallenge
 );
 
+router.get("/:challenge_id/checkCreator",
+    jwtMiddleware.verifyToken,
+    challengesController.checkUserIsCreator,
+    jwtMiddleware.sendToken
+)
+
 router.get("/:challenge_id", 
     jwtMiddleware.verifyToken,
     challengesController.getChallengeById

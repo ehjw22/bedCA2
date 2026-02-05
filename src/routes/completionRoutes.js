@@ -31,7 +31,7 @@ router.post('/:challenge_id',
 
 // 10. GET /challenges/{challenge_id}
 // Retrieves all user completion records for a specific challenge
-router.get('/:challenge_id',
+router.get('/:challenge_id/userCompletion',
     completionController.getUserCompletionByChallengeId
 );
 

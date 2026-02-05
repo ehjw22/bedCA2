@@ -238,3 +238,29 @@ module.exports.getSimilarChallenges = (req, res, next) => {
 
     model.retrieveSimilarChallenges(data, callback);
 }
+
+module.exports.checkUserIsCreator = (req, res, next) => {
+    const inputCreator_id = Number(res.locals.userId);
+
+    if (isNaN(inputCreator_id) || inputCreator_id <= 0) {
+        return res.status(400).json({message: "Invalid format for user ID"})
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error checkCreatorOfChallenge:", error);
+            return res.status(500).json(error);
+        } else {
+            if (results.length === 0) {
+                return res.status(404).json({message: "Challenge could not be found"});
+            } else if (results[0].creator_id == inputCreator_id) {
+                return res.status(403).json({message: "You are not the correct owner"});
+            } else {
+                next();
+            }
+        }
+    }
+    const data = {id: req.params.challenge_id};
+
+    model.getChallengeById(data, callback);
+}
