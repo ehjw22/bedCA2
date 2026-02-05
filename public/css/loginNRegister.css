@@ -14,3 +14,8 @@
 #loginSubmitBtn:hover, #registerSubmitBtn:hover {
     opacity: 0.9;
 }
+
+.login-logo {
+  width: 130px;        /* adjust to a good size */
+  height: auto;       /* keeps aspect ratio */
+}
