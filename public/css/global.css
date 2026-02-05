@@ -23,3 +23,11 @@ footer {
 html {
   overflow-y: scroll;
 }
+
+body {
+    min-height: 100vh;
+    background-image: url("../images/backgroundImg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
