@@ -120,13 +120,7 @@ function displayAllPlantedPlants () {
             displayItem.innerHTML = `
                 <h1 class="text-center">Planet Does Not Exist</h1>
                 <p class="text-center mt-2">
-                The planet you're looking for could not be found or the URL parameters are incorrect.
-                </p>
-                <p class="text-center ">
-                Please enter the URL in the following format:
-                </p>
-                <p class="text-center">
-                <code>http://localhost:3000/singlePlanetInfo.html?planet_id=1</code>
+                The planet you're looking for could not be found.
                 </p>
                 <div class="text-center my-4">
                     <a href="planets.html" class="btn btn-primary">Go Back</a>
