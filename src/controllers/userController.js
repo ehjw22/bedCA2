@@ -432,7 +432,10 @@ module.exports.getAllPlants = (req, res, next) => {
             console.error("Error getAllPlants:", error);
             return res.status(500).json({message: "Internal server error"});
         } else {
-            return res.status(200).json(results);
+            return res.status(200).json({
+                planetName: res.locals.planetName,
+                results
+            });
         }
     }
 
@@ -553,7 +556,7 @@ Calls the model to check planet existence.
 Returns 400 for invalid ID, 404 if not found, or proceeds to next middleware.
 */
 module.exports.checkPlanetIdExist = (req, res, next) => {
-    const inputPlanetId = Number(req.body.planet_id);
+    const inputPlanetId = Number(req.params.planet_id || req.body.planet_id);
 
     if (isNaN(inputPlanetId) || inputPlanetId <= 0) {
         return res.status(400).json({message: "Invalid format for planet id"});
@@ -567,6 +570,7 @@ module.exports.checkPlanetIdExist = (req, res, next) => {
             if (results.length === 0) {
                 return res.status(404).json({message: "Planet does not exist"});
             } else {
+                res.locals.planetName = results[0].name;
                 next();
             }
         }

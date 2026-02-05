@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <div class="mt-auto">
                             <a 
-                            href="singlePlanetInfo.html?planet_id=${planet.planetNumber}&planet_name=${planet.name}"
+                            href="singlePlanetInfo.html?planet_id=${planet.planetNumber}"
                             class="btn planet-btn w-100 visitPlanetBtn"
                             data-planet-id="${planet.planetNumber}"
                             >

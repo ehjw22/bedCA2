@@ -6,7 +6,6 @@ function displayAllPlantedPlants () {
     url = new URL(document.URL);
     const urlParams = url.searchParams;
     const planetId = urlParams.get("planet_id");
-    const planetName = urlParams.get("planet_name");
 
     const callbackForPlanetInfo = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
@@ -15,12 +14,14 @@ function displayAllPlantedPlants () {
         const planetInfo = document.getElementById("planetInfo");
         const planetNameElement = document.getElementById("planetName");
         planetInfo.innerHTML = "";
-        planetNameElement.textContent = planetName;
-        planetInfo.appendChild(addPlantCard);
-        generateSelectOptions();
-        plantPlant(planetId);
+        
         if (responseStatus == 200) {
-            responseData.forEach(plants => {
+            planetNameElement.textContent = responseData.planetName;
+            console.log(responseData.planetName);
+            planetInfo.appendChild(addPlantCard);
+            generateSelectOptions();
+            plantPlant(planetId);
+            responseData.results.forEach(plants => {
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                 const progress = calculateGrowthProgress(
@@ -36,7 +37,7 @@ function displayAllPlantedPlants () {
                     <div class="mt-auto">
                         <p class="plant-date text-center mb-2">Planted On: ${plants.planted_on}</p>
                         <div class="plant-progress mb-2">
-                            <small class="text-muted">Growth Progress</small>
+                            <small class="d-block text-center text-light">Growth Progress</small>
                             <div class="progress" style="height: 18px;">
                                 <div
                                     class="progress-bar"
@@ -71,7 +72,6 @@ function displayAllPlantedPlants () {
                 </div>
                 `;
                 planetInfo.appendChild(displayItem);
-            
             })
             
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -115,6 +115,24 @@ function displayAllPlantedPlants () {
             });
         } else if (responseStatus == 401) {
             handleSessionExpired();
+        } else if (responseStatus == 404 || responseStatus == 400) {
+            const displayItem = document.createElement("div");
+            displayItem.innerHTML = `
+                <h1 class="text-center">Planet Does Not Exist</h1>
+                <p class="text-center mt-2">
+                The planet you're looking for could not be found or the URL parameters are incorrect.
+                </p>
+                <p class="text-center ">
+                Please enter the URL in the following format:
+                </p>
+                <p class="text-center">
+                <code>http://localhost:3000/singlePlanetInfo.html?planet_id=1</code>
+                </p>
+                <div class="text-center my-4">
+                    <a href="planets.html" class="btn btn-primary">Go Back</a>
+                </div>
+            `;
+            planetInfo.appendChild(displayItem);
         }
         
 
