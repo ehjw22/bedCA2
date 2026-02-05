@@ -205,3 +205,19 @@ module.exports.checkCreatorOfChallenge = (req, res, next) => {
 
     model.getChallengeById(data, callback);
 }
+
+
+module.exports.getChallengeById = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getChallengeById:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            return res.status(200).json(results[0]);
+        }
+    }
+
+    const data = {id: req.params.challenge_id};
+
+    model.getChallengeById(data, callback);
+}

@@ -106,17 +106,20 @@ let currentChallengeId = null;
 
 document.addEventListener("click", (event) => {
     if (!event.target.classList.contains("updateChallengeBtn")) return;
+    currentChallengeId = event.target.dataset.challengeId;
 
     const callback = (responseStatus, responseData) => {
         if (responseStatus == 200) {
-            currentChallengeId = event.target.dataset.challengeId;
             const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
             modal.show();
+            document.getElementById("challengeDescription").value = responseData.description;
+            document.getElementById("challengeDifficulty").value = responseData.difficulty.toLowerCase();
+            document.getElementById("challengePoints").value = responseData.points;
         } else if (responseStatus == 401) {
             handleSessionExpired();
         }
     }
-    fetchMethod(currentUrl + "/api/jwt/verify", callback, "GET", null, localStorage.getItem("token"));
+    fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "GET", null, localStorage.getItem("token"));
     
 })
 
