@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("bought successfully");
             } else if (responseStatus == 401) {
                 handleSessionExpired();
+                toggleNavbar();
             } else {
                 showMessageToast(responseData.message, "Error")
             }

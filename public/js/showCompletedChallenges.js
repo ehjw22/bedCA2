@@ -36,6 +36,7 @@ function showCompletedChallenges () {
             }
         } else if (responseStatus == 401) {
             handleSessionExpired();
+            toggleNavbar();
         } else if (responseStatus == 404) {
             
             const displayItem = document.createElement("div");

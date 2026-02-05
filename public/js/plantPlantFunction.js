@@ -11,6 +11,7 @@ function plantPlant(planetId) {
                     displayAllPlantedPlants();
                 } else if (responseStatus == 401) {
                     handleSessionExpired();
+                    toggleNavbar();
                 }
             }
             const plantId = document.getElementById("plantPlantSelect").value;

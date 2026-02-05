@@ -85,6 +85,7 @@ function displayCreatedChallenges(createdChallengesList) {
                                 console.log(responseData);
                                 if (responseStatus == 401) {
                                     handleSessionExpired();
+                                    toggleNavbar();
                                     return
                                 } else if (responseStatus == 204) {
                                     const createdChallengesList = document.getElementById('createdChallenges')
@@ -125,6 +126,7 @@ document.addEventListener("click", (event) => {
             document.getElementById("challengePoints").value = responseData.points;
         } else if (responseStatus == 401) {
             handleSessionExpired();
+            toggleNavbar();
         }
     }
     fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "GET", null, localStorage.getItem("token"));

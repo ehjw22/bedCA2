@@ -104,6 +104,7 @@ function displayAllPlantedPlants () {
                                     fetchMethod(currentUrl + `/api/user/token/plants/${planetId}`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
                                 } else if (responseStatus == 401) {
                                     handleSessionExpired();
+                                    toggleNavbar();
                                 } else {
                                     showToast(responseData.message, "error");
                                 }
@@ -115,6 +116,7 @@ function displayAllPlantedPlants () {
             });
         } else if (responseStatus == 401) {
             handleSessionExpired();
+            toggleNavbar();
         } else if (responseStatus == 404 || responseStatus == 400) {
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `

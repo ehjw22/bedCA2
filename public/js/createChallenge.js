@@ -14,6 +14,7 @@ document.addEventListener("click", function (event) {
             modal.show();
         } else if (responseStatus == 401) {
             handleSessionExpired();
+            toggleNavbar();
         }
     }
 

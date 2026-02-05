@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 modal.show();
             } else if (responseStatus == 401) {
                 handleSessionExpired();
+                toggleNavbar();
             } else if (responseStatus == 403) {
                 showToast("You cannot complete a challenge you made", "Error")
             }
