@@ -66,3 +66,15 @@ module.exports.getChallengeById = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.retrieveSimilarChallenges = (data, callback) => {
+    const SQLSTATEMENT = `
+    SELECT * FROM wellnesschallenge
+    WHERE description LIKE ?
+    LIMIT 5;
+    `;
+
+    const VALUES = [`%${data.text}%`];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}

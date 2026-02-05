@@ -221,3 +221,20 @@ module.exports.getChallengeById = (req, res, next) => {
 
     model.getChallengeById(data, callback);
 }
+
+module.exports.getSimilarChallenges = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getSimilarChallenges", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            return res.status(200).json(results);
+        }
+    }
+
+    const data = {
+        text: req.body.text
+    }
+
+    model.retrieveSimilarChallenges(data, callback);
+}

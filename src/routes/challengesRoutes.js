@@ -27,6 +27,10 @@ router.post('/',
 // Retrieves all challenges from the database and returns them 
 router.get('/', challengesController.getAllChallenge);
 
+router.get("/similarChallenges", 
+    challengesController.getSimilarChallenges
+)
+
 // 7. DELETE /challenges/{challenge_id}
 // Deletes a challenge after verifying it exists, then removes related user completion records
 router.delete('/:challenge_id', 
