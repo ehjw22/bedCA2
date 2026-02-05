@@ -26,7 +26,14 @@ function showCompletedChallenges () {
                     `;
                     completedChallengesList.appendChild(displayItem);
                 })
-            } 
+            } else {
+                const displayItem = document.createElement("div");
+                displayItem.innerHTML = `
+                    <h2 class="text-center">Completed challenges will appear here</h2>
+                `
+                completedChallengesList.appendChild(displayItem);
+                return;
+            }
         } else if (responseStatus == 401) {
             handleSessionExpired();
         } else if (responseStatus == 404) {
