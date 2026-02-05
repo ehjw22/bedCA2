@@ -2,8 +2,16 @@ function displayCreatedChallenges(createdChallengesList) {
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
         console.log("responseData:", responseData);
-
         createdChallengesList.innerHTML = "";
+        if (responseData.length == 0) {
+            const displayItem = document.createElement("div");
+            displayItem.innerHTML = `
+                <h2 class="text-center">Created challenges will appear here</h2>
+            `
+            createdChallengesList.appendChild(displayItem);
+            return;
+        }
+       
         responseData.forEach(challenge => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
