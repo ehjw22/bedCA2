@@ -106,6 +106,7 @@ router.post('/token/plants/:plant_id/buy',
     controller.buyPlant
 );
 
+// Get all challenges created by a user
 router.get("/token/challenges",
     jwtMiddleware.verifyToken,
     controller.getUserCreatedChallenges

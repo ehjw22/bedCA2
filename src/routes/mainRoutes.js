@@ -20,8 +20,13 @@ const router = express.Router();
 // =================================
 // DEFINE ROUTES
 // =================================
+// route to simply verify validity of jwt token
 router.get("/jwt/verify", jwtMiddleware.verifyToken, jwtMiddleware.sendToken);
+
+// login route
 router.post("/login", userController.login, bcryptMiddleware.comparePassword, jwtMiddleware.generateToken, userController.confirmLogin, jwtMiddleware.sendToken);
+
+// register route
 router.post("/register", userController.checkUsernameOrEmailExist, bcryptMiddleware.hashPassword, userController.register, userController.unlockPlanetsFirstTime, jwtMiddleware.generateToken, jwtMiddleware.sendToken);
 router.use('/user', userRoutes);
 router.use('/challenges', challengesRoutes);

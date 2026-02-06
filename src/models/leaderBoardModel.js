@@ -20,6 +20,7 @@ module.exports.getUserRankedByChallengesCompleted = (callback) => {
     pool.query(SQLSTATEMENT, callback);
 }
 
+// Get top 10 users ranked by experience points (exp)
 module.exports.getUserOrderedByExp = (callback) => {
     const SQLSTATEMENT = `
         SELECT 
@@ -36,6 +37,7 @@ module.exports.getUserOrderedByExp = (callback) => {
     pool.query(SQLSTATEMENT, callback);
 }
 
+// Get top 10 users ranked by total planted plants
 module.exports.getAllUserByTotalPlantedPlants = (callback) => {
     const SQLSTATEMENT = `
     SELECT 

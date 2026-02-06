@@ -21,6 +21,11 @@ module.exports.getAllUserByChallengesCompleted = (req, res, next) => {
     model.getUserRankedByChallengesCompleted(callback);
 }
 
+/*
+Handles a request to retrieve all users ordered by their experience points (exp) in descending order.
+Calls the model to fetch user records ranked by exp and returns them as JSON.
+Sends a 500 status code if there is an error during the database query.
+*/
 module.exports.getAllUserByExp = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -33,6 +38,11 @@ module.exports.getAllUserByExp = (req, res, next) => {
     model.getUserOrderedByExp(callback);
 }
 
+/*
+Handles a request to retrieve all users ordered by their total planted plants in descending order.
+Calls the model to fetch user records with plant counts and returns them as JSON.
+Sends a 500 status code if there is an error during the database query.
+*/
 module.exports.getAllUserByPlantedPlants = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {

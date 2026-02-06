@@ -49,8 +49,10 @@ router.put('/:challenge_id',
     challengesController.updateChallenge
 );
 
+// Retrieves a specific challenge information
 router.get("/:challenge_id", 
     jwtMiddleware.verifyToken,
     challengesController.getChallengeById
-)
+);
+
 module.exports = router;
