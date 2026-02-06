@@ -478,3 +478,14 @@ module.exports.unlockUserPlanets = (data, callback) => {
 
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
+
+module.exports.checkUserOwnsPlanet = (data, callback) => {
+    const SQLSTATEMENT = `
+    SELECT * FROM userplanet
+    WHERE user_id = ? AND planet_id = ?;
+    `;
+
+    const VALUES = [data.user_id, data.planet_id];
+
+    pool.query(SQLSTATEMENT, VALUES, callback);
+}

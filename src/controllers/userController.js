@@ -967,3 +967,24 @@ module.exports.unlockPlanetsFirstTime = (req, res, next) => {
 
     model.unlockUserPlanets(data, callback);
 }
+
+module.exports.checkUserUnlockedPlant = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            return res.status(500).json(error);
+        } else {
+            if (results.length === 0) {
+                return res.status(404).json({message: "No planet found"});
+            } else {
+                next();
+            }
+        }
+    }
+
+    const data = {
+        user_id: res.locals.userId,
+        planet_id: req.params.planet_id
+    }
+
+    model.checkUserOwnsPlanet(data, callback);
+}

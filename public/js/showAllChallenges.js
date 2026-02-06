@@ -62,6 +62,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 showToast("Challenge successfully completed");
                 bootstrap.Modal.getInstance(document.getElementById("completeModal")).hide();
                 displayUserStats(); //refreshes user stats after completion
+            } else if (responseStatus == 401) {
+                handleSessionExpired();
+            } else {
+                showToast(responseData.message, "Error");
             }
             console.log(responseStatus)
             console.log(responseData);
