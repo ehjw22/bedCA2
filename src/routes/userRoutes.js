@@ -97,8 +97,6 @@ router.post('/token/plants/:plant_id/plant',
     controller.plantPlant
 );
 
-
-
 // POST /{user_id}/plants/{plant_id}/buy
 // Allows a user to purchase a plant
 router.post('/token/plants/:plant_id/buy', 

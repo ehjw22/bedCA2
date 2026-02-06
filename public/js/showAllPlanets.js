@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const planetList = document.getElementById("planetContainer");
         const token = localStorage.getItem("token");
         if (!token) {
-            
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
                 <h2 class="text-center">Login/Register to view your planets</h2>
@@ -16,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
             return
         }
         if (responseStatus == 200) {
-
-        
             responseData.forEach(planet => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -51,9 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
             handleSessionExpired();
             toggleNavbar();
         }
-        
-        
     }
-
     fetchMethod(currentUrl + "/api/user/token/planets", callback, "GET", null, localStorage.getItem("token"));
 })

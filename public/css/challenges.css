@@ -1,7 +1,7 @@
 #challengesContainer {
-    background: linear-gradient(135deg, #2b2f77, #1a1d4e);
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
+  background: linear-gradient(135deg, #2b2f77, #1a1d4e);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.25);
 }
 
 .complete-btn {
@@ -16,7 +16,7 @@
 }
 
 .complete-btn:hover {
-  opacity: 0.9;
+  opacity: 0.9; 
 }
 
 .difficulty-Easy {
@@ -38,5 +38,5 @@
 }
 
 #createChallengeBtn {
-    background: linear-gradient(135deg, #6f7cff, #9b6dff);
+  background: linear-gradient(135deg, #6f7cff, #9b6dff);
 }

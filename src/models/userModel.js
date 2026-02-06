@@ -424,6 +424,7 @@ module.exports.checkNUnlockBadges = (data, callback) => {
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
+// Inserts a new user record into the User table
 module.exports.registerUser = (data, callback) => {
     const SQLSTATEMENT = `
     INSERT INTO User (username, email, password) VALUES
@@ -435,6 +436,7 @@ module.exports.registerUser = (data, callback) => {
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
+// Retrieves all plants purchased by a specific user
 module.exports.getUserBoughtPlants = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT 
@@ -453,6 +455,7 @@ module.exports.getUserBoughtPlants = (data, callback) => {
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
+// Retrieves all challenges created by a specific user
 module.exports.getUsersCreatedChallenges = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT * FROM wellnesschallenge
@@ -464,6 +467,7 @@ module.exports.getUsersCreatedChallenges = (data, callback) => {
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
+// Unlocks the initial planet for a user
 module.exports.unlockUserPlanets = (data, callback) => {
     const SQLSTATEMENT = `
     INSERT INTO userplanet (user_id, planet_id)

@@ -206,7 +206,11 @@ module.exports.checkCreatorOfChallenge = (req, res, next) => {
     model.getChallengeById(data, callback);
 }
 
-
+/*
+Handles request to retrieve a challenge by its ID.
+Calls the model to fetch challenge details.
+Returns 404 if not found or 200 with the challenge data.
+*/
 module.exports.getChallengeById = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -222,6 +226,11 @@ module.exports.getChallengeById = (req, res, next) => {
     model.getChallengeById(data, callback);
 }
 
+/*
+Handles request to retrieve challenges similar to a given text.
+Calls the model to perform similarity matching.
+Returns a list of similar challenges or 500 on error.
+*/
 module.exports.getSimilarChallenges = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -239,6 +248,11 @@ module.exports.getSimilarChallenges = (req, res, next) => {
     model.retrieveSimilarChallenges(data, callback);
 }
 
+/*
+Handles request to verify that the user is NOT the creator of a challenge.
+Calls the model to retrieve the creator ID of the challenge.
+Returns 403 if user is the creator, 404 if not found, or proceeds to next middleware.
+*/
 module.exports.checkUserIsCreator = (req, res, next) => {
     const inputCreator_id = Number(res.locals.userId);
 

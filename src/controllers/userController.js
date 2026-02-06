@@ -792,6 +792,11 @@ module.exports.unlockBadges = (req, res, next) => {
     model.checkNUnlockBadges(data, callback);
 }
 
+/*
+Handles user login request using a username or email identifier.
+Calls the model to retrieve the user ID and password hash.
+Returns 404 if user not found or proceeds to password verification middleware.
+*/
 module.exports.login = (req, res, next) => {
 
     // const inputUsername = req.body.username;
@@ -835,6 +840,11 @@ module.exports.login = (req, res, next) => {
     model.getUserId(data, callback);
 }
 
+/*
+Handles request to check whether a username or email already exists.
+Calls the model to search for existing users.
+Returns 409 if username or email is already taken, or proceeds to next middleware.
+*/
 module.exports.checkUsernameOrEmailExist = (req, res, next) => {
     const inputUsername = req.body.username;
     const inputEmail = req.body.email;
@@ -868,6 +878,11 @@ module.exports.checkUsernameOrEmailExist = (req, res, next) => {
     model.getUserId(data, callback);
 }
 
+/*
+Handles request to register a new user.
+Calls the model to insert a new user record.
+Stores the new user ID and success message before proceeding to next middleware.
+*/
 module.exports.register = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -889,6 +904,11 @@ module.exports.register = (req, res, next) => {
     model.registerUser(data, callback);
 }
 
+/*
+Handles request to retrieve plants purchased by the authenticated user.
+Calls the model to fetch all plants owned by the user.
+Returns a list of bought plants or 500 on error.
+*/
 module.exports.getUserBoughtPlants = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -905,6 +925,11 @@ module.exports.getUserBoughtPlants = (req, res, next) => {
     model.getUserBoughtPlants(data, callback);
 }
 
+/*
+Handles request to retrieve challenges created by the authenticated user.
+Calls the model to fetch challenges created by the user.
+Returns a list of created challenges or 500 on error.
+*/
 module.exports.getUserCreatedChallenges = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
@@ -922,6 +947,11 @@ module.exports.getUserCreatedChallenges = (req, res, next) => {
     model.getUsersCreatedChallenges(data, callback);
 }
 
+/*
+Handles request to unlock planets for a user on their first login.
+Calls the model to initialize unlocked planets for the user.
+Proceeds silently to next middleware after completion.
+*/
 module.exports.unlockPlanetsFirstTime = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {

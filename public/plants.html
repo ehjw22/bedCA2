@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/modal.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="./images/galaxy.png" alt="" width="32">
@@ -61,64 +61,65 @@
 
       </div>
     </div>
-    </nav>
+  </nav>
 
-    <main class="flex-grow-1 container-md">
-      <div id="plantsContainer" class="row mt-3">
-        <h1 class="text-center mt-2 glow">Plant Shop</h1>
+  <main class="flex-grow-1 container-md">
+    <div id="plantsContainer" class="row mt-3">
+      <h1 class="text-center mt-2 glow">Plant Shop</h1>
+    </div>
+
+    <div id="userBoughtPlants" class="row mt-3 d-none">
+      <h1 class="text-center mt-2 glow">Owned Plants</h1>
+      <div id="boughtPlantsList" class="row">
+
       </div>
+    </div>
 
-      <div id="userBoughtPlants" class="row mt-3 d-none">
-        <h1 class="text-center mt-2 glow">Owned Plants</h1>
-        <div id="boughtPlantsList" class="row">
-
+    <div class="toast-container position-fixed bottom-0 start-0 p-3">
+      <div id="loginToast" class="toast text-bg-danger" role="alert">
+        <div class="toast-body">
+          Please <a href="login.html" class="link-light">login</a>/<a href="register.html" class="link-light">register</a> to complete challenges
         </div>
       </div>
+    </div>
 
-      <div class="toast-container position-fixed bottom-0 start-0 p-3">
-        <div id="loginToast" class="toast text-bg-danger" role="alert">
-          <div class="toast-body">
-            Please <a href="login.html" class="link-light">login</a>/<a href="register.html" class="link-light">register</a> to complete challenges
+    <div class="toast-container position-fixed bottom-0 start-0 p-3">
+      <div id="messageToast" class="toast" role="alert">
+        <div class="toast-body">
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="sessionExpiredModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Session Expired</h5>
+          </div>
+          <div class="modal-body">
+            Your session has expired.
+            Please sign in again to continue.
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" id="goHomeBtn">Go Back</button>
+            <button class="btn btn-primary" id="signInBtn">Sign In</button>
           </div>
         </div>
       </div>
+    </div>
+  </main>
 
-      <div class="toast-container position-fixed bottom-0 start-0 p-3">
-        <div id="messageToast" class="toast" role="alert">
-          <div class="toast-body">
-            
-          </div>
-        </div>
-      </div>
-      
-      <div class="modal fade" id="sessionExpiredModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Session Expired</h5>
-            </div>
-            <div class="modal-body">
-              Your session has expired.
-              Please sign in again to continue.
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" id="goHomeBtn">Go Back</button>
-              <button class="btn btn-primary" id="signInBtn">Sign In</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <footer class="text-center py-3">
-        <small>© 2026 Wellness Quest · Build habits, explore galaxies</small>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="js/getCurrentURL.js" type="text/javascript"></script>
-    <script src="js/queryCmds.js" type="text/javascript"></script>
-    <script src="js/showAllPlants.js" type="text/javascript"></script>
-    <script src="js/userNavbarToggle.js" type="text/javascript"></script>
-    <script src="js/showUserBoughtPlants.js" type="text/javascript"></script>
-    <script src="js/handleTokenExpiry.js" type="text/javascript"></script>
+  <footer class="text-center py-3">
+      <small>© 2026 Wellness Quest · Build habits, explore galaxies</small>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="js/getCurrentURL.js" type="text/javascript"></script>
+  <script src="js/queryCmds.js" type="text/javascript"></script>
+  <script src="js/showAllPlants.js" type="text/javascript"></script>
+  <script src="js/userNavbarToggle.js" type="text/javascript"></script>
+  <script src="js/showUserBoughtPlants.js" type="text/javascript"></script>
+  <script src="js/handleTokenExpiry.js" type="text/javascript"></script>
 </body>
 </html>

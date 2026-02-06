@@ -1,24 +1,25 @@
 # Wellness Gamification App (Full-Stack)
 
-This is a full-stack wellness gamification application. Users can complete wellness challenges, earn points, level up, unlock planets and plants, and manage their garden.
+This is a full-stack wellness gamification application. Users can complete wellness challenges, earn points, level up, unlock planets and plants, and manage their virtual garden.
 
 The project includes:
 - Backend: Node.js, Express, MySQL
-- Frontend: HTML, CSS, JS (uses Bootstrap for UI and popovers/modals)
+- Frontend: HTML, CSS, JavaScript (uses Bootstrap for UI components such as modals and popovers)
 
 ---
 
 ## Table of Contents
 
-1. Environment Variables
-2. Database Setup
-3. Installing Dependencies
-4. Running the Backend
-5. Running the Frontend
-6. Endpoints
-7. Game Logic Overview
-8. Frontend Features
-9. Error Handling and Validation
+1. Environment Variables  
+2. Database Setup  
+3. Installing Dependencies  
+4. Running the Backend  
+5. Running the Frontend  
+6. Game Logic Overview  
+7. Frontend Features  
+8. API Endpoints  
+9. Error Handling and Validation  
+10. Security  
 
 ---
 
@@ -29,19 +30,20 @@ Create a `.env` file in the root directory with the following variables:
 DB_HOST=localhost  
 DB_USER=root  
 DB_PASSWORD=your_password  
-DB_NAME=your_database_name  
+DB_NAME=wellness_app  
 JWT_SECRET_KEY=your_jwt_secret  
-JWT_EXPIRES_IN=15m  
 
-- `db.js` in `src/services` uses `dotenv` to load these variables.  
-- `JWT_SECRET_KEY` is used to sign tokens for user authentication.  
+- Environment variables are loaded using the `dotenv` package.
+- The database connection in `src/services/db.js` reads these variables.
+- `JWT_SECRET_KEY` is used to sign and verify JSON Web Tokens for authentication.
 
 ---
 
 ## Database Setup
 
-The database tables are created using an SQL initialization script:
+The application uses a MySQL database to store all user, challenge, and game-related data.
 
+Tables include:
 - Users  
 - Wellness Challenges  
 - Challenge Completions  
@@ -51,106 +53,135 @@ The database tables are created using an SQL initialization script:
 - Plants  
 - UserPlanets  
 - UserPlants  
-- UserBadge  
-- UserBoughtPlants  
+- UserBadges  
 
----
+Create the database:
 
-## Installing Dependencies
+Run the provided database initialization scripts to create tables:
+npm run init_tables
+Ensure MySQL is running before starting the application.
 
-### Backend
+Installing Dependencies
+Backend
+Navigate to the project root directory.
 
-1. Install the dependencies:
+Install all dependencies:
 
 npm install
+Backend dependencies (from package.json) include:
+- express
+- mysql2
+- dotenv
+- bcrypt
+- jsonwebtoken
+- nodemon
 
-Dependencies used:
-
-express, nodemon, mysql2, dotenv, bcrypt, jsonwebtoken
-
-2. Initialize the database tables:
-
-npm run init_tables
-
-3. Start the server:
+## Running the Backend
+Start the backend server in development mode:
 
 npm run dev
+Or start normally:
 
-### Frontend
+node index.js
+The server will run at:
 
-- The frontend uses HTML, CSS, JS, with Bootstrap for UI components.  
-- Simply open `index.html` (or the planet page) in your browser, or serve via a static server.  
-- Ensure the backend is running, since the frontend fetches data from the API.  
+http://localhost:3000
 
----
+## Running the Frontend
+Frontend files are located in the public/ directory.
+
+Pages can be opened directly in the browser or served statically by Express.
+
+Ensure the backend server is running, as frontend JavaScript communicates with the backend using the Fetch API.
 
 ## Game Logic Overview
+Users earn points by completing wellness challenges.
 
-- Users earn points by completing wellness challenges.  
-- Points contribute to leveling up based on experience thresholds.  
-- Higher levels unlock new planets and plants.  
-- Plants must be purchased before planting.  
-- Badges are awarded automatically when specific conditions are met.  
+Points contribute to leveling up based on experience thresholds.
 
----
+Higher levels unlock new planets and plants.
+
+Plants must be purchased before they can be planted.
+
+Badges are automatically awarded when specific conditions are met.
+
+User progression is persisted in the database.
 
 ## Frontend Features
+Display all planets and indicate which ones are unlocked.
 
-- Display all planets, showing which ones the user has unlocked.  
-- Display plants inside a planet, showing growth stage and planted date.  
-- Users can plant new plants using a modal.  
-- Users can delete planted plants with a confirmation popover.  
-- Popovers and modals are powered by Bootstrap.  
-- Pages automatically refresh after planting or deleting plants.  
+Display plants within planets, including growth stage and planted date.
 
----
+Plant new plants using Bootstrap modals.
 
-## Endpoints
+Delete planted plants using confirmation popovers.
 
-### Users
+Automatic page refresh after plant-related actions.
 
-- POST /users – Create a new user.  
-- GET /users – Retrieve all users with user_id, username, and points.  
-- GET /users/{user_id} – Retrieve details of a specific user.  
-- PUT /users/{user_id} – Update user details (password, email).  
-- POST /users/login – Login via username/email + password.  
+UI interactions (modals and popovers) are powered by Bootstrap.
 
-### Challenges
+## API Endpoints
+1. Users
+POST /users/register – Register a new user
 
-- POST /challenges – Create a new wellness challenge.  
-- GET /challenges – Retrieve all challenges.  
-- DELETE /challenges/{challenge_id} – Delete challenge + completions.  
-- PUT /challenges/{challenge_id} – Update challenge (only creator).  
-- POST /challenges/{creator_id} – Create completion record for a user.  
-- GET /challenges/{challenge_id} – Retrieve users who attempted the challenge.  
+POST /users/login – Login using email/username and password
 
-### Leaderboard
+GET /users/:user_id – Retrieve a specific user profile
 
-- GET /leaderboard – Users ordered by level descending.  
+2. Challenges
+GET /challenges – Retrieve all wellness challenges
 
-### Planets and Plants
+POST /challenges/complete – Mark a challenge as completed
 
-- GET /planets – Retrieve all planets.  
-- GET /plants – Retrieve all plants.  
-- GET /users/{user_id}/planets – Retrieve planets the user unlocked.  
-- GET /users/{user_id}/plants – Retrieve plants the user has purchased.  
-- POST /users/{user_id}/plants/{plant_id}/plant – Plant a plant on a planet.  
-- DELETE /users/{user_id}/plants/{plant_id} – Delete a planted plant.  
-- POST /users/{user_id}/plants/{plant_id}/buy – Purchase a plant.  
+3. Leaderboard
+GET /leaderboard – Retrieve users ordered by level
 
-### Badges
+4. Planets and Plants
+GET /planets – Retrieve all planets
 
-- GET /users/{user_id}/badges – Retrieve all badges earned by the user.  
+GET /plants – Retrieve all plants
 
-### Completions
+GET /users/:user_id/planets – Retrieve planets unlocked by the user
 
-- GET /users/{user_id}/completions – Retrieve all challenges completed by the user.  
+GET /users/:user_id/plants – Retrieve plants owned by the user
 
----
+POST /users/:user_id/plants/:plant_id/buy – Purchase a plant
+
+POST /users/:user_id/plants/:plant_id/plant – Plant a plant
+
+DELETE /users/:user_id/plants/:plant_id – Remove a planted plant
+
+5. Badges
+GET /users/:user_id/badges – Retrieve badges earned by the user
+
+6. Completions
+GET /users/:user_id/completions – Retrieve completed challenges
 
 ## Error Handling and Validation
+Input validation is performed at the controller level before database operations.
 
-- Inputs are validated at the controller level before database operations.  
-- Returns meaningful HTTP status codes: 400, 403, 404, 409, 500.  
-- Middleware is used for repeated checks: existence, ownership, authorization.  
-- Database errors are handled safely to prevent crashes.  
+Middleware is used for:
+- Authorization
+- Ownership validation
+- Resource existence checks
+
+Meaningful HTTP status codes are returned:
+
+400 Bad Request
+
+403 Forbidden
+
+404 Not Found
+
+409 Conflict
+
+500 Internal Server Error
+
+## Security
+Passwords are securely hashed using bcrypt.
+
+Authentication is handled using JSON Web Tokens (JWT).
+
+Sensitive configuration values are stored in .env.
+
+User ownership is enforced on protected routes to prevent unauthorized access.

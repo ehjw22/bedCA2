@@ -67,6 +67,7 @@ module.exports.getChallengeById = (data, callback) => {
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
+// Retrieves up to five challenges with descriptions similar to the provided text
 module.exports.retrieveSimilarChallenges = (data, callback) => {
     const SQLSTATEMENT = `
     SELECT * FROM wellnesschallenge

@@ -16,6 +16,6 @@
 }
 
 .login-logo {
-  width: 130px;        /* adjust to a good size */
-  height: auto;       /* keeps aspect ratio */
+    width: 130px;
+    height: auto;
 }
