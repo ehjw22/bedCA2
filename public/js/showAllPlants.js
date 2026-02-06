@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const plantsList = document.getElementById("plantsContainer");
+    const plantsList = document.getElementById("plantsContainerList");
 
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
         console.log("responseData:", responseData);
-
+        plantsList.innerHTML = ""
         responseData.forEach(plant => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
