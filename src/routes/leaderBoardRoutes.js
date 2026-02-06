@@ -23,4 +23,8 @@ router.get('/challenge',
 router.get('/byExp',
     controller.getAllUserByExp
 );
+
+router.get('/byPlantPlanted',
+    controller.getAllUserByPlantedPlants
+)
 module.exports = router;

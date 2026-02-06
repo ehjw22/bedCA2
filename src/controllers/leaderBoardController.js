@@ -32,3 +32,15 @@ module.exports.getAllUserByExp = (req, res, next) => {
     }
     model.getUserOrderedByExp(callback);
 }
+
+module.exports.getAllUserByPlantedPlants = (req, res, next) => {
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error getAllUserByPlantedPlants:", error);
+            return res.status(500).json({message: "Internal server error"});
+        } else {
+            return res.status(200).json(results);
+        }
+    }
+    model.getAllUserByTotalPlantedPlants(callback);
+}

@@ -35,3 +35,19 @@ module.exports.getUserOrderedByExp = (callback) => {
 
     pool.query(SQLSTATEMENT, callback);
 }
+
+module.exports.getAllUserByTotalPlantedPlants = (callback) => {
+    const SQLSTATEMENT = `
+    SELECT 
+        user.user_id,
+        user.username,
+        COUNT(userplant.user_plant_id) AS plant_count
+    FROM user
+    INNER JOIN userplant ON userplant.user_id = user.user_id
+    GROUP BY user.user_id
+    ORDER BY plant_count DESC
+    limit 10;
+    `;
+
+    pool.query(SQLSTATEMENT, callback);
+}
