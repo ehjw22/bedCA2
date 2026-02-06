@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (responseStatus == 201) {
                 displayAllUserBoughtPlants();
                 showMessageToast(responseData.message);
-                console.log("bought successfully");
+                displayPoints();
             } else if (responseStatus == 401) {
                 handleSessionExpired();
                 toggleNavbar();
