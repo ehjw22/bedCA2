@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 bootstrap.Modal.getInstance(document.getElementById("createChallengeModal")).hide()
                 displayChallenges(document.getElementById("challengesList"));
             } else {
-                showToast(responseData.message, "error");
+                showToast(responseData.message || responseData.error, "error");
             }
         }
 

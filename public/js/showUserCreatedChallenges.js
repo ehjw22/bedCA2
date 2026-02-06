@@ -169,6 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 showCompletedChallenges();
                 displayCreatedChallenges(createdChallengesList);
                 showToast("Challenge Successfully Updated")
+            } else if (responseStatus == 401) {
+                handleSessionExpired();
+                return
             }
         }
 
