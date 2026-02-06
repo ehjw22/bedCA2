@@ -8,7 +8,7 @@ Handles a request to retrieve all users ordered by their level in descending ord
 Calls the model to fetch user records ranked by level and returns them as JSON.
 Sends a 500 status code if there is an error during the database query. 
 */
-module.exports.getAllUserByLevel = (req, res, next) => {
+module.exports.getAllUserByChallengesCompleted = (req, res, next) => {
     const callback = (error, results, fields) => {
         if (error) {
             console.error("Error getAllUserByLevel:", error);
@@ -18,5 +18,5 @@ module.exports.getAllUserByLevel = (req, res, next) => {
         }
     }
 
-    model.getUserRankedByLevel(callback);
+    model.getUserRankedByChallengesCompleted(callback);
 }

@@ -4,7 +4,7 @@
 const pool = require('../services/db');
 
 // retrieve the information of all users and sorts them by their level in a descending order.
-module.exports.getUserRankedByLevel = (callback) => {
+module.exports.getUserRankedByChallengesCompleted = (callback) => {
     const SQLSTATEMENT = `
     SELECT 
         user_id,
