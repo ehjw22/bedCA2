@@ -42,7 +42,7 @@ function generateSelectOptions () {
                     if (plant.quantity != 0) {
                         const option = document.createElement("option");
                         option.value = plant.plant_id;
-                        option.textContent = plant.name;
+                        option.textContent = `${plant.name} (x${plant.quantity})`;
                         selectBox.appendChild(option)
                         noOptions = false
                     }

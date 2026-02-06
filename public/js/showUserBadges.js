@@ -31,7 +31,7 @@ function displayBadges() {
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
                 <h2 class="text-center">No badges earned yet.</h2>
-                <h2 class="text-center">Complete challenges to earn badges</h2>
+                <h2 class="text-center">Complete challenges to earn badges.</h2>
             `;
 
             badgesList.appendChild(displayItem);

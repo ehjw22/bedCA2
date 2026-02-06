@@ -59,7 +59,7 @@ function displayAllPlantedPlants () {
                             data-bs-html="true"
                             data-bs-content='
                                 <div class="text-center">
-                                <p class="mb-2">Delete this planet?</p>
+                                <p class="mb-2">Delete this plant?</p>
                                 <button class="btn btn-sm btn-danger confirm-delete">Yes</button>
                                 <button class="btn btn-sm btn-secondary cancel-delete">Cancel</button>
                                 </div>

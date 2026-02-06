@@ -6,7 +6,7 @@ function displayCreatedChallenges(createdChallengesList) {
         if (responseData.length == 0) {
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
-                <h2 class="text-center">Created challenges will appear here</h2>
+                <h2 class="text-center">Created challenges will appear here.</h2>
             `
             createdChallengesList.appendChild(displayItem);
             return;
@@ -32,7 +32,7 @@ function displayCreatedChallenges(createdChallengesList) {
                             data-bs-html="true"
                             data-bs-content='
                                 <div class="text-center">
-                                <p class="mb-2">Delete this planet?</p>
+                                <p class="mb-2">Delete this challenge?</p>
                                 <button class="btn btn-sm btn-danger confirm-delete">Yes</button>
                                 <button class="btn btn-sm btn-secondary cancel-delete">Cancel</button>
                                 </div>

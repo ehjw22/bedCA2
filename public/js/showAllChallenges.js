@@ -25,12 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (responseStatus == 401) {
                 handleSessionExpired();
                 toggleNavbar();
-            } else if (responseStatus == 403) {
-                showToast("You cannot complete a challenge you made", "Error")
-            }
+            } 
         }
 
-        fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}/checkCreator`, callback, "GET", null, token);
+        fetchMethod(currentUrl + `/api/jwt/verify`, callback, "GET", null, token);
     })
 
     completeForm.addEventListener("submit", (e) => {
@@ -84,10 +82,10 @@ function displayChallenges(challengesList) {
                 <h3 class="challenge-title flex-grow-1">${challenge.description}</h3>
                 
                 <div class="challenge-meta">
-                    <span class="points-badge">⭐ ${challenge.points} pts</span>
                     <span class="difficulty-${challenge.difficulty}">
                         ${challenge.difficulty}
                     </span>
+                    <span class="points-badge">⭐ ${challenge.points} Points</span>
                 </div>
 
                 <button 

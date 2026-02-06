@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="planet-body d-flex flex-column flex-grow-1">
                     <h4 class="planet-title">${planet.name}</h4>
 
-                    <hr class="planet-divider">
-
                     <p class="planet-desc text-center">
                         ${planet.description}
                     </p>

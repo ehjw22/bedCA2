@@ -11,18 +11,19 @@ document.addEventListener("DOMContentLoaded", function() {
             displayItem.innerHTML = `
             <div class="plant-card h-100">
                 <img src="../images/${plant.plantImage}" class="plant-img">
-                 <div class="plant-body">
-                <h3 class="plant-title">${plant.name}</h3>
+                <div class="plant-body">
+                    <h3 class="plant-title">${plant.name}</h3>
 
-                <div class="mt-auto">
-                    <p class="plant-price">Price: ${plant.plant_cost} points</p>
-                    <hr class="divider">
-                    <button 
-                    class="btn btn-buy buyPlantBtn" 
-                    data-plant-id="${plant.plant_id}">
-                    Buy
-                    </button>
-                </div>
+                    <div class="mt-auto">
+                        <p class="plant-price">Price: ${plant.plant_cost} points</p>
+                        <p>Growth Time: ${plant.growth_time_days} Days</p>
+                        <hr class="divider">
+                        <button 
+                        class="btn btn-buy buyPlantBtn" 
+                        data-plant-id="${plant.plant_id}">
+                        Buy
+                        </button>
+                    </div>
                 </div>
             `;
             plantsList.appendChild(displayItem);

@@ -9,33 +9,25 @@ function showCompletedChallenges () {
         if (responseStatus == 200) {
             const completedChallengesList = document.getElementById("completedChallengesList");
             completedChallengesList.innerHTML = "";
-            if (responseData.length !== 0) {    
-                responseData.forEach(completion => {
-                    const displayItem = document.createElement("div");
-                    displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
-                    displayItem.innerHTML = `
-                    <div class="challenge-card completed-challenge p-3">
-                        <h4 class="challenge-title flex-grow-1">${completion.challenge}</h4>
-
-                        <div class="challenge-meta">
-                            <span class="points-badge">⭐ ${completion.points_earned} pts</span>
-                            <span class="completed-badge">Completed</span>
-                        </div>    
-                        <small class="text-light text-center mt-2">
-                            Completed on ${completion.completed_on}
-                        </small>
-                    </div>
-                    `;
-                    completedChallengesList.appendChild(displayItem);
-                })
-            } else {
+            responseData.forEach(completion => {
                 const displayItem = document.createElement("div");
+                displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                 displayItem.innerHTML = `
-                    <h2 class="text-center">Completed challenges will appear here</h2>
-                `
+                <div class="challenge-card completed-challenge p-3">
+                    <h4 class="challenge-title flex-grow-1">${completion.challenge}</h4>
+
+                    <div class="challenge-meta">
+                        <span class="points-badge">⭐ ${completion.points_earned} pts</span>
+                        <span class="completed-badge">Completed</span>
+                    </div>    
+                    <small class="text-light text-center mt-2">
+                        Completed on ${completion.completed_on}
+                    </small>
+                </div>
+                `;
                 completedChallengesList.appendChild(displayItem);
-                return;
-            }
+            })
+            
         } else if (responseStatus == 401) {
             handleSessionExpired();
             toggleNavbar();
@@ -46,7 +38,7 @@ function showCompletedChallenges () {
             completedChallengesList.innerHTML = "";
             displayItem.innerHTML = `
                 <h2 class="text-center">No challenges completed yet.</h2>
-                <h2 class="text-center">Complete a challenge to see your progress here</h2>
+                <h2 class="text-center">Complete a challenge to see your progress here.</h2>
             `;
             completedChallengesList.appendChild(displayItem);
         }
