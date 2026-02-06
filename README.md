@@ -121,41 +121,88 @@ Automatic page refresh after plant-related actions.
 UI interactions (modals and popovers) are powered by Bootstrap.
 
 ## API Endpoints
-1. Users
-POST /users/register – Register a new user
+The main routes include:
 
-POST /users/login – Login using email/username and password
+/jwt/verify – verifies if a JWT token is valid and returns user information if valid.
 
-GET /users/:user_id – Retrieve a specific user profile
+/login – logs in a user using email or username and password, returning a JWT on success.
 
-2. Challenges
-GET /challenges – Retrieve all wellness challenges
+/register – registers a new user, unlocks the first planets for new users, and generates a JWT token.
 
-POST /challenges/complete – Mark a challenge as completed
+Sub-routes include:
 
-3. Leaderboard
-GET /leaderboard – Retrieve users ordered by level
+/user – for user management.
 
-4. Planets and Plants
-GET /planets – Retrieve all planets
+/challenges – for challenges and completions.
 
-GET /plants – Retrieve all plants
+/leaderboard – for leaderboard endpoints.
 
-GET /users/:user_id/planets – Retrieve planets unlocked by the user
+/planets – for planet management.
 
-GET /users/:user_id/plants – Retrieve plants owned by the user
+/plants – for plant management.
 
-POST /users/:user_id/plants/:plant_id/buy – Purchase a plant
+### The challenges routes allow users to:
 
-POST /users/:user_id/plants/:plant_id/plant – Plant a plant
+POST /challenges – create a new wellness challenge.
 
-DELETE /users/:user_id/plants/:plant_id – Remove a planted plant
+GET /challenges – retrieve all challenges.
 
-5. Badges
-GET /users/:user_id/badges – Retrieve badges earned by the user
+POST /challenges/similarChallenges – return challenges similar to a provided description.
 
-6. Completions
-GET /users/:user_id/completions – Retrieve completed challenges
+DELETE /challenges/:challenge_id – remove a challenge after verifying it exists, also deleting related user completion records.
+
+PUT /challenges/:challenge_id – update a challenge after verifying ownership.
+
+GET /challenges/:challenge_id – retrieve information for a specific challenge.
+
+### The completion routes allow users to:
+
+POST /challenges/:challenge_id – create a completion record for a challenge, update user points, level, unlocked planets, and badges.
+
+GET /challenges/:challenge_id/userCompletion – retrieve all user completion records for a specific challenge.
+
+### The leaderboard routes allow users to:
+
+GET /leaderboard/challenge – retrieve all users ranked by challenges completed.
+
+GET /leaderboard/byExp – retrieve users ranked by experience.
+
+GET /leaderboard/byPlantPlanted – retrieve users ranked by the number of plants they have planted.
+
+### The planet route includes
+GET /planets – retrieves all available planets.
+
+### The plant route includes
+GET /plants - retrieves all available plants.
+
+### User routes allow:
+POST /users – creates a new user account
+
+GET /users – retrieves all users
+
+GET /users/token – retrieves details of the currently logged-in user
+
+PUT /users/token – updates user information after verifying identity
+
+GET /users/token/badges – retrieves all badges earned by the user
+
+GET /users/token/planets – retrieves all planets unlocked by the user
+
+GET /users/token/plants/:planet_id – lists all plants owned by the user on a specific planet
+
+GET /users/token/boughtPlants – shows all purchased plants
+
+GET /users/token/completions – retrieves all challenges completed by the user
+
+DELETE /users/token/plants/:user_plant_id – removes a plant owned by the user
+
+POST /users/token/plants/:plant_id/plant – plants an owned plant on a specific planet
+
+POST /users/token/plants/:plant_id/buy – allows the user to purchase a plant
+
+GET /users/token/challenges – retrieves all challenges created by the user.
+
+All protected routes use jwtMiddleware.verifyToken to validate tokens, and relevant controllers handle database queries, input validation, and error responses.
 
 ## Error Handling and Validation
 Input validation is performed at the controller level before database operations.
