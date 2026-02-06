@@ -21,7 +21,9 @@ function showCompletedChallenges () {
                             <span class="points-badge">⭐ ${completion.points_earned} pts</span>
                             <span class="completed-badge">Completed</span>
                         </div>    
-
+                        <small class="text-light text-center mt-2">
+                            Completed on ${completion.completed_on}
+                        </small>
                     </div>
                     `;
                     completedChallengesList.appendChild(displayItem);
