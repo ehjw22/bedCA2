@@ -1,3 +1,13 @@
+/*
+* Purpose: Displays challenges created by the logged-in user and allows:
+*          - Deleting challenges (with confirmation popover)
+*          - Updating challenges (opens modal pre-filled with current values)
+*          - Handles token expiration and empty challenge lists.
+*/
+
+let currentChallengeId = null;
+
+// fetch and display all challenges created by the user
 function displayCreatedChallenges(createdChallengesList) {
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
@@ -12,6 +22,7 @@ function displayCreatedChallenges(createdChallengesList) {
             return;
         }
        
+        // create a card for each challenge
         responseData.forEach(challenge => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -56,6 +67,7 @@ function displayCreatedChallenges(createdChallengesList) {
             createdChallengesList.appendChild(displayItem);
         })
 
+        // initialise delete popovers
         const deleteBtns = document.querySelectorAll(".deleteChallengeBtn");
 
         deleteBtns.forEach(btn => {
@@ -72,9 +84,10 @@ function displayCreatedChallenges(createdChallengesList) {
                     const popoverElement = popoverInstance.tip;
 
                     const confirmBtn = popoverElement.querySelector(".confirm-delete");
-                    const deleteBtn = popoverElement.querySelector(".cancel-delete")
+                    const cancelBtn = popoverElement.querySelector(".cancel-delete")
 
-                    deleteBtn.addEventListener("click", () => popoverInstance.hide());
+                    // hide popover on cancel
+                    cancelBtn.addEventListener("click", () => popoverInstance.hide());
 
                     if (!confirmBtn.dataset.listenerAttached) {
                         confirmBtn.dataset.listenerAttached = true;
@@ -109,56 +122,59 @@ function displayCreatedChallenges(createdChallengesList) {
 document.addEventListener("DOMContentLoaded", () => {
     const createdChallengesList = document.getElementById('createdChallenges')
     displayCreatedChallenges(createdChallengesList);
-})
 
-let currentChallengeId = null;
+    // handles update challenge button click
+    document.addEventListener("click", (event) => {
+        if (!event.target.classList.contains("updateChallengeBtn")) return;
+        currentChallengeId = event.target.dataset.challengeId;
 
-document.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("updateChallengeBtn")) return;
-    currentChallengeId = event.target.dataset.challengeId;
-
-    const callback = (responseStatus, responseData) => {
-        if (responseStatus == 200) {
-            const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
-            modal.show();
-            document.getElementById("challengeDescription").value = responseData.description;
-            document.getElementById("challengeDifficulty").value = responseData.difficulty.toLowerCase();
-            document.getElementById("challengePoints").value = responseData.points;
-        } else if (responseStatus == 401) {
-            handleSessionExpired();
-            toggleNavbar();
+        const callback = (responseStatus, responseData) => {
+            if (responseStatus == 200) {
+                const modal = new bootstrap.Modal(document.getElementById("updateChallengeModal"));
+                modal.show();
+                document.getElementById("challengeDescription").value = responseData.description;
+                document.getElementById("challengeDifficulty").value = responseData.difficulty.toLowerCase();
+                document.getElementById("challengePoints").value = responseData.points;
+            } else if (responseStatus == 401) {
+                handleSessionExpired();
+                toggleNavbar();
+            }
         }
-    }
-    fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "GET", null, localStorage.getItem("token"));
-    
-})
+        fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "GET", null, localStorage.getItem("token"));
+        
+    })
 
-const updateChallengeForm = document.getElementById("updateChallengeForm");
+    const updateChallengeForm = document.getElementById("updateChallengeForm");
 
-updateChallengeForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    // handles update challenge form submission
+    updateChallengeForm.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    const description = document.getElementById("challengeDescription").value;
-    const difficulty = document.getElementById("challengeDifficulty").value;
-    const points = document.getElementById("challengePoints").value;
+        const description = document.getElementById("challengeDescription").value;
+        const difficulty = document.getElementById("challengeDifficulty").value;
+        const points = document.getElementById("challengePoints").value;
 
-    const data = {
-        description,
-        difficulty,
-        points
-    }
-
-    const callback = (responseStatus, responseData) => {
-        console.log(responseStatus);
-        console.log(responseData);
-        if (responseStatus == 200) {
-            const createdChallengesList = document.getElementById('createdChallenges');
-            bootstrap.Modal.getInstance(document.getElementById("updateChallengeModal")).hide();
-            showCompletedChallenges();
-            displayCreatedChallenges(createdChallengesList);
+        const data = {
+            description,
+            difficulty,
+            points
         }
-    }
 
-    fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "PUT", data, localStorage.getItem("token"));
+        const callback = (responseStatus, responseData) => {
+            console.log(responseStatus);
+            console.log(responseData);
+            if (responseStatus == 200) {
+                const createdChallengesList = document.getElementById('createdChallenges');
+                bootstrap.Modal.getInstance(document.getElementById("updateChallengeModal")).hide();
+                showCompletedChallenges();
+                displayCreatedChallenges(createdChallengesList);
+            }
+        }
 
+        fetchMethod(currentUrl + `/api/challenges/${currentChallengeId}`, callback, "PUT", data, localStorage.getItem("token"));
+
+    })
 })
+
+
+

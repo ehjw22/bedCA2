@@ -1,6 +1,15 @@
+/**
+* Purpose: Fetches and displays all plants bought by the logged-in user.
+*          - Hides section if user is not logged in.
+*          - Displays a message if no plants have been bought yet.
+*          - Handles token expiration.
+*/
+
 const displayAllUserBoughtPlants = function() {
     const userBoughtPlantsDiv = document.getElementById("boughtPlantsList");
     const userboughtPlantsSection = document.getElementById("userBoughtPlants");
+
+    // hides section if user is not logged in
     if (!localStorage.getItem("token")) {
         userboughtPlantsSection.classList.add("d-none")
     } else {
@@ -8,13 +17,21 @@ const displayAllUserBoughtPlants = function() {
         const callback = (responseStatus, responseData) => {
             console.log("responseStatus:", responseStatus);
             console.log("responseData:", responseData);
-            userBoughtPlantsDiv.innerHTML = ""
 
+            if (responseStatus == 401) {
+                handleSessionExpired();
+                return
+            }
+
+            userBoughtPlantsDiv.innerHTML = ""
+            
             if (responseData.length == 0) {
                 const displayItem = document.createElement("div");
-                displayItem.textContent = "Bought Plants will appear here."
+                displayItem.innerHTML = "<p class='text-center'>Bought Plants will appear here.</p>"
+                userBoughtPlantsDiv.appendChild(displayItem);
             } else {
                 responseData.forEach(plant => {
+                    // if plant quantity more than 0, create a card for each one
                     if (plant.quantity != 0) {
                         const displayItem = document.createElement("div");
                         displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -38,4 +55,4 @@ const displayAllUserBoughtPlants = function() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", displayAllUserBoughtPlants());
+document.addEventListener("DOMContentLoaded", displayAllUserBoughtPlants);

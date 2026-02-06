@@ -1,11 +1,21 @@
+/**
+* Purpose: Displays all challenges and handles completing a challenge.
+*          Includes:
+*          - Rendering challenge cards dynamically
+*          - Handling "Complete" button clicks
+*          - Submitting reflections and feedback for a challenge
+*/
+
 let currentChallengeId = null;
 
 document.addEventListener("DOMContentLoaded", function() {
     const challengesList = document.getElementById("challengesList");
     const completeForm = document.getElementById("completeForm");
     
+    // Initially display all challenges
     displayChallenges(challengesList)
     
+    // handles click on complete button
     challengesList.addEventListener("click", function(event) {
         if (!event.target.classList.contains("completeChallengebtn")) return;
        
@@ -16,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         currentChallengeId = event.target.dataset.challengeId
+
+        // verify token before showing complete modal
         const callback = (responseStatus, responseData) => {
             console.log(responseData);
             console.log(responseStatus);
@@ -31,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchMethod(currentUrl + `/api/jwt/verify`, callback, "GET", null, token);
     })
 
+    // handle submission of challenge completion form
     completeForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const reflection = document.getElementById("reflection").value;
@@ -48,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (responseStatus == 200) {
                 showToast("Challenge successfully completed");
                 bootstrap.Modal.getInstance(document.getElementById("completeModal")).hide();
-                displayUserStats();
+                displayUserStats(); //refreshes user stats after completion
             }
             console.log(responseStatus)
             console.log(responseData);
@@ -61,19 +74,23 @@ document.addEventListener("DOMContentLoaded", function() {
             data,
             localStorage.getItem("token")
         );        
-       
+        
+        // reset the form
         completeForm.reset()
     })
     
     
 })
 
+// fetches all challenges and dynamically render them as cards
 function displayChallenges(challengesList) {
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
         console.log("responseData:", responseData);
 
         challengesList.innerHTML = "";
+
+        // create a card for each challenge
         responseData.forEach(challenge => {
             const displayItem = document.createElement("div");
             displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";

@@ -1,3 +1,10 @@
+/*
+* Purpose: Dynamically generates a plant selection dropdown for the "Plant a New Plant" card.
+*          Fetches plants the user has bought and updates the select box accordingly.
+*          Displays a message if no plants are available.
+*/
+
+// Create the plant a new plant card element
 const addPlantCard = document.createElement("div");
 
 addPlantCard.classList = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -28,6 +35,11 @@ addPlantCard.innerHTML = `
 
 </div>
 `
+
+/*
+* Fetches the plants the user has bought and generates options for the select box.
+* Disables the select box and shows a message if no plants are available.
+*/
 function generateSelectOptions () {
     const callback = (responseStatus, responseData) => {
         console.log(responseStatus)
@@ -36,8 +48,10 @@ function generateSelectOptions () {
         if (responseStatus == 200) {
             const selectBox = document.getElementById("plantPlantSelect")
             if (responseData.length != 0) {
-                
+                // reset select box with placeholder option
                 selectBox.innerHTML = `<option value="" disabled selected hidden>Select Plant</option>`;
+
+                // add an option for each plant with quantity with quantity > 0
                 responseData.forEach(plant => {
                     if (plant.quantity != 0) {
                         const option = document.createElement("option");
@@ -48,6 +62,8 @@ function generateSelectOptions () {
                     }
                 })
             } 
+
+            // if no available plants, show message and disable select
             if (noOptions) {
                 const messageText = document.getElementById("errMsg");
                 messageText.textContent = "Buy plants to plant them here";
@@ -56,5 +72,7 @@ function generateSelectOptions () {
         }
         
     }
+
+    // fetch the users bought plants from the backend
     fetchMethod(currentUrl + `/api/user/token/boughtPlants`, callback, "GET", null, localStorage.getItem("token"));
 }

@@ -1,7 +1,14 @@
-document.addEventListener("DOMContentLoaded", function() {
-    displayAllPlantedPlants();
-})
+/**
+* Purpose: Displays all planted plants on a specific planet.
+*          - Fetches planet info and plants for the selected planet.
+*          - Displays plant cards with growth progress bars.
+*          - Allows planting new plants and deleting existing plants.
+*          - Handles token expiration and missing planet cases.
+*/
 
+document.addEventListener("DOMContentLoaded", displayAllPlantedPlants)
+
+// fetches and displays all plants for a specific planet
 function displayAllPlantedPlants () {
     url = new URL(document.URL);
     const urlParams = url.searchParams;
@@ -19,8 +26,10 @@ function displayAllPlantedPlants () {
             planetNameElement.textContent = responseData.planetName;
             console.log(responseData.planetName);
             planetInfo.appendChild(addPlantCard);
-            generateSelectOptions();
-            plantPlant(planetId);
+            generateSelectOptions(); // populate select box with available plants
+            plantPlant(planetId); // attach planting functionality
+
+            // display each planted plant as a card
             responseData.results.forEach(plants => {
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -29,11 +38,15 @@ function displayAllPlantedPlants () {
                     plants.growthTime
                 );
                 const progressRounded = Math.floor(progress);
+
+                // format the planted date of the plant
                 const plantedDate = new Date(plants.planted_on).toLocaleDateString("en-SG", {
                     day: "numeric",
                     month: "short",
                     year: "numeric"
                 });
+
+                // rendering the card
                 displayItem.innerHTML = `
                 <div class="plant-card h-100 d-flex flex-column p-3">
                     <img src="../images/${plants.plantImage}" class="card-img-top mb-2" style="height: 150px; object-fit: cover;">
@@ -76,9 +89,11 @@ function displayAllPlantedPlants () {
                     </div>    
                 </div>
                 `;
+
                 planetInfo.appendChild(displayItem);
             })
             
+            // initialise delete popovers and attach event listeners
             const deleteButtons = document.querySelectorAll(".delete-btn");
 
             deleteButtons.forEach(btn => {
@@ -86,25 +101,26 @@ function displayAllPlantedPlants () {
                     const popover = new bootstrap.Popover(btn, {
                         trigger: "click",
                         placement: "bottom",
-                        sanitize: false 
+                        sanitize: false // allow html content in popover
                     });
                     btn.dataset.popoverInitialised = true;
 
                     btn.addEventListener("shown.bs.popover", () => {
                         const popoverElement = document.querySelector(".popover");
 
+                        // cancel delete button
                         popoverElement.querySelector(".cancel-delete")
                         .addEventListener("click", () => popover.hide());
 
+                        // confirm delete button
                         popoverElement.querySelector(".confirm-delete")
                         .addEventListener("click", () => {
                             popover.hide();
-                            console.log("Delete confirmed");
-                            // call delete API here
                             const callback = (responseStatus, responseData) => {
                                 console.log(responseStatus);
                                 console.log(responseData);
                                 if (responseStatus == 204) {
+                                    // refreshes plant list if successful
                                     showToast("Plant successfully removed");
                                     fetchMethod(currentUrl + `/api/user/token/plants/${planetId}`, callbackForPlanetInfo, "GET", null, localStorage.getItem("token"))
                                 } else if (responseStatus == 401) {
@@ -114,6 +130,8 @@ function displayAllPlantedPlants () {
                                     showToast(responseData.message, "error");
                                 }
                             }
+
+                            // call delete api
                             fetchMethod(currentUrl + `/api/user/token/plants/${btn.dataset.userplantId}`, callback, "DELETE", null, localStorage.getItem("token"));
                         });
                     });
@@ -123,6 +141,7 @@ function displayAllPlantedPlants () {
             handleSessionExpired();
             toggleNavbar();
         } else if (responseStatus == 404 || responseStatus == 400) {
+            // handle planet not found or bad request
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
                 <h1 class="text-center">Planet Does Not Exist</h1>

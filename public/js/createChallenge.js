@@ -1,3 +1,11 @@
+/**
+* Purpose: Handles creating new challenges, including:
+*          - Verifying user token before allowing challenge creation
+*          - Submitting new challenges via POST request
+*          - Displaying similar challenge suggestions with debounce
+*/
+
+
 document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("click", function (event) {
         if (event.target.id !== "createChallengeBtn") return;
@@ -9,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         
+        // Verify token before showing modal
         const callback = (responseStatus, responseData) => {
             if (responseStatus == 200) {
                 const modal = new bootstrap.Modal(document.getElementById("createChallengeModal"));
@@ -22,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchMethod(currentUrl + `/api/jwt/verify`, callback, "GET", null, token);
     })
 
+    // handle submission of new challenge form
     const newChallengeForm = document.getElementById("createChallengeForm");
 
     newChallengeForm.addEventListener("submit", function(e) {
@@ -36,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             difficulty
         };
 
+        // callback to handle challenge creation response
         const callback = (responseStatus, responseData) => {
             if (responseStatus == 201) {
                 showToast("Challenge successfully created")
@@ -49,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchMethod(currentUrl + `/api/challenges`, callback, "POST", data, localStorage.getItem("token"));
     })
 
+    // handle similar challenges suggestions as user types
     const descriptionInput = document.getElementById("challengeDescription");
     const similarBox = document.getElementById("similarChallengesBox");
 
@@ -57,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
     descriptionInput.addEventListener("input", function () {
         const inputText = this.value.trim();
         console.log(inputText);
+
         // clear previous debounce
         clearTimeout(debounceTimer);
 
@@ -65,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // debounce request by 300ms
+        // debounce request by 300ms to reduce api calls
         debounceTimer = setTimeout(() => {
             const data = { text: inputText };
 

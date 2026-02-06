@@ -1,3 +1,11 @@
+/*
+* Purpose: Fetches and displays the user's statistics (quests completed, points, experience)
+*          on the dashboard. Handles token expiration by clearing it and toggling login state.
+*/
+
+/*
+* Fetches user stats from the backend and displays them on the page.
+*/
 const displayUserStats = function() {
     const callback = (responseStatus, responseData) => {
         console.log("Response Status:", responseStatus);
@@ -32,6 +40,7 @@ const displayUserStats = function() {
             `;
             userStatsList.appendChild(displayItem);
         } else if (responseStatus == 401) {
+            // Token expired, remove it and update UI accordingly
             localStorage.removeItem('token');
             toggleLoginNStats()
             toggleNavbar();

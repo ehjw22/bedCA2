@@ -1,5 +1,12 @@
+/*
+* Purpose: Fetches and displays the leaderboard of users based on completed challenges.
+*          Highlights the top 3 users with different table row styles.
+*/
+
 document.addEventListener("DOMContentLoaded", function() {
     const leaderBoardList = document.getElementById("completedChallengesLeaderboard");
+
+    // Callback to handle leaderboard API response
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
         console.log("responseData:", responseData);

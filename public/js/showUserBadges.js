@@ -1,3 +1,8 @@
+/**
+* Purpose: Fetches and displays all badges earned by the logged-in user.
+*          Handles cases where no badges have been earned yet.
+*/
+
 function displayBadges() {
     const badgesList = document.getElementById("badgesEarnedList");
 
@@ -8,6 +13,7 @@ function displayBadges() {
         if (responseStatus == 200) {
             badgesList.innerHTML = "";
             
+            // create a card for each badge
             responseData.forEach(badge => {
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
@@ -27,6 +33,7 @@ function displayBadges() {
             })
             
         } else if (responseStatus == 404) {
+            // no badges earned yet
             badgesList.innerHTML = "";
             const displayItem = document.createElement("div");
             displayItem.innerHTML = `
@@ -41,4 +48,4 @@ function displayBadges() {
     fetchMethod(currentUrl + `/api/user/token/badges`, callback, "GET", null, localStorage.getItem("token"));
 }
 
-document.addEventListener("DOMContentLoaded", displayBadges());
+document.addEventListener("DOMContentLoaded", displayBadges);

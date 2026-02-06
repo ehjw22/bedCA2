@@ -1,7 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
-    showCompletedChallenges();
-})
+/**
+* Purpose: Fetches and displays all challenges completed by the logged-in user.
+*          Shows points earned, completion date, and handles cases where no challenges exist.
+*/
 
+
+document.addEventListener("DOMContentLoaded", showCompletedChallenges)
+
+// fetches completed challenges for the current uesr and renders them as cards
 function showCompletedChallenges () {
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
@@ -10,6 +15,7 @@ function showCompletedChallenges () {
             const completedChallengesList = document.getElementById("completedChallengesList");
             completedChallengesList.innerHTML = "";
             responseData.forEach(completion => {
+                // format completion date
                 const completedDate = new Date(completion.completed_on).toLocaleDateString("en-SG", {
                     day: "numeric",
                     month: "short",
@@ -37,7 +43,7 @@ function showCompletedChallenges () {
             handleSessionExpired();
             toggleNavbar();
         } else if (responseStatus == 404) {
-            
+            // no completed challenges yet
             const displayItem = document.createElement("div");
             const completedChallengesList = document.getElementById("completedChallengesList");
             completedChallengesList.innerHTML = "";

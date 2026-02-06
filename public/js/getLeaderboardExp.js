@@ -1,5 +1,13 @@
+/**
+* Purpose: Fetches and displays the leaderboard of users based on total experience.
+*          Highlights the top 3 users with different table row styles.
+*/
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const userByExperienceList = document.getElementById("experienceLeaderBoard");
+
+    // Callback to handle leaderboard API response
     const callback = (responseStatus, responseData) => {
         console.log("responseStatus:", responseStatus);
         console.log("responseData:", responseData);
