@@ -10,6 +10,11 @@ function showCompletedChallenges () {
             const completedChallengesList = document.getElementById("completedChallengesList");
             completedChallengesList.innerHTML = "";
             responseData.forEach(completion => {
+                const completedDate = new Date(completion.completed_on).toLocaleDateString("en-SG", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
                 const displayItem = document.createElement("div");
                 displayItem.className = "col-xl-3 col-lg-4 col-md-6 p-3";
                 displayItem.innerHTML = `
@@ -21,7 +26,7 @@ function showCompletedChallenges () {
                         <span class="completed-badge">Completed</span>
                     </div>    
                     <small class="text-light text-center mt-2">
-                        Completed on ${completion.completed_on}
+                        Completed on ${completedDate}
                     </small>
                 </div>
                 `;

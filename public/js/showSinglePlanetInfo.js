@@ -29,13 +29,18 @@ function displayAllPlantedPlants () {
                     plants.growthTime
                 );
                 const progressRounded = Math.floor(progress);
+                const plantedDate = new Date(plants.planted_on).toLocaleDateString("en-SG", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
                 displayItem.innerHTML = `
                 <div class="plant-card h-100 d-flex flex-column p-3">
                     <img src="../images/${plants.plantImage}" class="card-img-top mb-2" style="height: 150px; object-fit: cover;">
                     <h4 class="plant-title text-center">${plants.plantName}</h4>
                     <hr>
                     <div class="mt-auto">
-                        <p class="plant-date text-center mb-2">Planted On: ${plants.planted_on}</p>
+                        <p class="plant-date text-center mb-2">Planted On: ${plantedDate}</p>
                         <div class="plant-progress mb-2">
                             <small class="d-block text-center text-light">Growth Progress</small>
                             <div class="progress" style="height: 18px;">
