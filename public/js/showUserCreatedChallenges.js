@@ -168,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 bootstrap.Modal.getInstance(document.getElementById("updateChallengeModal")).hide();
                 showCompletedChallenges();
                 displayCreatedChallenges(createdChallengesList);
+                showToast("Challenge Successfully Updated")
             }
         }
 
