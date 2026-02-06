@@ -14,7 +14,24 @@ module.exports.getUserRankedByChallengesCompleted = (callback) => {
         total_challenges_completed
     FROM user
     ORDER BY total_challenges_completed DESC
+    LIMIT 10
     `;
+
+    pool.query(SQLSTATEMENT, callback);
+}
+
+module.exports.getUserOrderedByExp = (callback) => {
+    const SQLSTATEMENT = `
+        SELECT 
+            user_id,
+            username,
+            level,
+            exp,
+            total_challenges_completed
+        FROM user
+        ORDER BY exp DESC
+        LIMIT 10
+    `
 
     pool.query(SQLSTATEMENT, callback);
 }

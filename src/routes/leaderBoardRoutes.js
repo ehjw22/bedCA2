@@ -16,8 +16,11 @@ const router = express.Router();
 
 // GET /leaderboard
 // Retrieves all users ranked by level for the leaderboard
-router.get('/', 
+router.get('/challenge', 
     controller.getAllUserByChallengesCompleted
 );
 
+router.get('/byExp',
+    controller.getAllUserByExp
+);
 module.exports = router;
